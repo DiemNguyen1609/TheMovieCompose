@@ -16,12 +16,15 @@
 
 package com.example.android.architecture.blueprints.todoapp.data.source.network
 
-import javax.inject.Inject
+import com.diemn.apiclient.network.ITheMovieRepository
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
+import javax.inject.Inject
 
-class TaskNetworkDataSource @Inject constructor() : NetworkDataSource {
+class TaskNetworkDataSource @Inject constructor(
+    private val iTheMovieRepository: ITheMovieRepository
+) : NetworkDataSource {
 
     // A mutex is used to ensure that reads and writes are thread-safe.
     private val accessMutex = Mutex()
@@ -39,8 +42,18 @@ class TaskNetworkDataSource @Inject constructor() : NetworkDataSource {
     )
 
     override suspend fun loadTasks(): List<NetworkTask> = accessMutex.withLock {
+        val taskResponse = mutableListOf<NetworkTask>()
+        iTheMovieRepository.getListMovie(page = 1).data?.map {
+            taskResponse.add(
+                NetworkTask(
+                    id = it.id.toString(),
+                    title = it.title ?: "",
+                    shortDescription = it.country ?: ""
+                )
+            )
+        }
         delay(SERVICE_LATENCY_IN_MILLIS)
-        return tasks
+        return taskResponse
     }
 
     override suspend fun saveTasks(newTasks: List<NetworkTask>) = accessMutex.withLock {

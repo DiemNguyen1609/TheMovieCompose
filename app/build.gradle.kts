@@ -23,6 +23,7 @@ plugins {
 }
 
 android {
+    namespace = "com.example.android.architecture.blueprints.todoapp"
     compileSdk = libs.versions.compileSdk.get().toInt()
 
     defaultConfig {
@@ -81,17 +82,18 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
 
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "17"
     }
 
-    packagingOptions {
-        excludes += "META-INF/AL2.0"
-        excludes += "META-INF/LGPL2.1"
+    packaging {
+        resources {
+            excludes += "/META-INF/{AL2.0,LGPL2.1}"
+        }
     }
 
     composeOptions {
@@ -111,7 +113,7 @@ android {
  all versions in a single place. This improves readability and helps managing project complexity.
  */
 dependencies {
-
+    implementation(project(":apiclient"))
     // App dependencies
     implementation(libs.androidx.annotation)
     implementation(libs.kotlinx.coroutines.android)

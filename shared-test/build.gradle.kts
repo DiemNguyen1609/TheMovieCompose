@@ -31,6 +31,7 @@ android {
 
 dependencies {
     implementation(project(":app"))
+    implementation(project(":apiclient"))
     implementation(libs.kotlinx.coroutines.android)
     implementation(libs.kotlinx.coroutines.test)
     implementation(libs.junit4)
