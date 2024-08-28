@@ -1,0 +1,82 @@
+<?xml version="1.0" ?>
+<SmellBaseline>
+  <ManuallySuppressedIssues></ManuallySuppressedIssues>
+  <CurrentIssues>
+    <ID>ForbiddenComment:StatisticsViewModel.kt$StatisticsViewModel$// TODO: Show error message?</ID>
+    <ID>FunctionNaming:AddEditTaskScreen.kt$@Composable fun AddEditTaskScreen( @StringRes topBarTitle: Int, onTaskUpdate: () -&gt; Unit, onBack: () -&gt; Unit, modifier: Modifier = Modifier, scaffoldState: ScaffoldState = rememberScaffoldState(), viewModel: AddEditTaskViewModel = hiltViewModel() )</ID>
+    <ID>FunctionNaming:AddEditTaskScreen.kt$@Composable private fun AddEditTaskContent( loading: Boolean, title: String, description: String, onTitleChanged: (String) -&gt; Unit, onDescriptionChanged: (String) -&gt; Unit, modifier: Modifier = Modifier )</ID>
+    <ID>FunctionNaming:ComposeUtils.kt$@Composable fun LoadingContent( loading: Boolean, empty: Boolean, emptyContent: @Composable () -&gt; Unit, onRefresh: () -&gt; Unit, modifier: Modifier = Modifier, content: @Composable () -&gt; Unit )</ID>
+    <ID>FunctionNaming:HomeDrawer.kt$@Composable fun AppModalDrawer( drawerState: DrawerState, currentRoute: String, navigationActions: TodoNavigationActions, coroutineScope: CoroutineScope = rememberCoroutineScope(), content: @Composable () -&gt; Unit )</ID>
+    <ID>FunctionNaming:HomeDrawer.kt$@Composable private fun AppDrawer( currentRoute: String, navigateToTasks: () -&gt; Unit, navigateToStatistics: () -&gt; Unit, closeDrawer: () -&gt; Unit, modifier: Modifier = Modifier )</ID>
+    <ID>FunctionNaming:HomeDrawer.kt$@Composable private fun DrawerButton( painter: Painter, label: String, isSelected: Boolean, action: () -&gt; Unit, modifier: Modifier = Modifier )</ID>
+    <ID>FunctionNaming:HomeDrawer.kt$@Composable private fun DrawerHeader( modifier: Modifier = Modifier )</ID>
+    <ID>FunctionNaming:HomeDrawer.kt$@Preview("Drawer contents") @Composable fun PreviewAppDrawer()</ID>
+    <ID>FunctionNaming:HomeNavGraph.kt$@Composable fun TodoNavGraph( modifier: Modifier = Modifier, navController: NavHostController = rememberNavController(), coroutineScope: CoroutineScope = rememberCoroutineScope(), drawerState: DrawerState = rememberDrawerState(initialValue = DrawerValue.Closed), startDestination: String = TodoDestinations.TASKS_ROUTE, navActions: TodoNavigationActions = remember(navController) { TodoNavigationActions(navController) } )</ID>
+    <ID>FunctionNaming:StatisticsScreen.kt$@Composable fun StatisticsScreen( openDrawer: () -&gt; Unit, modifier: Modifier = Modifier, viewModel: StatisticsViewModel = hiltViewModel(), scaffoldState: ScaffoldState = rememberScaffoldState() )</ID>
+    <ID>FunctionNaming:StatisticsScreen.kt$@Composable private fun StatisticsContent( loading: Boolean, empty: Boolean, activeTasksPercent: Float, completedTasksPercent: Float, onRefresh: () -&gt; Unit, modifier: Modifier = Modifier )</ID>
+    <ID>FunctionNaming:StatisticsScreen.kt$@Preview @Composable fun StatisticsContentEmptyPreview()</ID>
+    <ID>FunctionNaming:StatisticsScreen.kt$@Preview @Composable fun StatisticsContentPreview()</ID>
+    <ID>FunctionNaming:TaskDetailScreen.kt$@Composable fun TaskDetailScreen( onEditTask: (String) -&gt; Unit, onBack: () -&gt; Unit, onDeleteTask: () -&gt; Unit, modifier: Modifier = Modifier, viewModel: TaskDetailViewModel = hiltViewModel(), scaffoldState: ScaffoldState = rememberScaffoldState() )</ID>
+    <ID>FunctionNaming:TaskDetailScreen.kt$@Composable private fun EditTaskContent( loading: Boolean, empty: Boolean, task: Task?, onTaskCheck: (Boolean) -&gt; Unit, onRefresh: () -&gt; Unit, modifier: Modifier = Modifier )</ID>
+    <ID>FunctionNaming:TaskDetailScreen.kt$@Preview @Composable private fun EditTaskContentEmptyPreview()</ID>
+    <ID>FunctionNaming:TaskDetailScreen.kt$@Preview @Composable private fun EditTaskContentPreview()</ID>
+    <ID>FunctionNaming:TaskDetailScreen.kt$@Preview @Composable private fun EditTaskContentTaskCompletedPreview()</ID>
+    <ID>FunctionNaming:TasksScreen.kt$@Composable fun TasksScreen( @StringRes userMessage: Int, onAddTask: () -&gt; Unit, onTaskClick: (Task) -&gt; Unit, onUserMessageDisplayed: () -&gt; Unit, openDrawer: () -&gt; Unit, modifier: Modifier = Modifier, viewModel: TasksViewModel = hiltViewModel(), scaffoldState: ScaffoldState = rememberScaffoldState() )</ID>
+    <ID>FunctionNaming:TasksScreen.kt$@Composable private fun TaskItem( task: Task, onCheckedChange: (Boolean) -&gt; Unit, onTaskClick: (Task) -&gt; Unit )</ID>
+    <ID>FunctionNaming:TasksScreen.kt$@Composable private fun TasksContent( loading: Boolean, tasks: List&lt;Task&gt;, @StringRes currentFilteringLabel: Int, @StringRes noTasksLabel: Int, @DrawableRes noTasksIconRes: Int, onRefresh: () -&gt; Unit, onTaskClick: (Task) -&gt; Unit, onTaskCheckedChange: (Task, Boolean) -&gt; Unit, modifier: Modifier = Modifier )</ID>
+    <ID>FunctionNaming:TasksScreen.kt$@Composable private fun TasksEmptyContent( @StringRes noTasksLabel: Int, @DrawableRes noTasksIconRes: Int, modifier: Modifier = Modifier )</ID>
+    <ID>FunctionNaming:TasksScreen.kt$@Preview @Composable private fun TaskItemCompletedPreview()</ID>
+    <ID>FunctionNaming:TasksScreen.kt$@Preview @Composable private fun TaskItemPreview()</ID>
+    <ID>FunctionNaming:TasksScreen.kt$@Preview @Composable private fun TasksContentEmptyPreview()</ID>
+    <ID>FunctionNaming:TasksScreen.kt$@Preview @Composable private fun TasksContentPreview()</ID>
+    <ID>FunctionNaming:TasksScreen.kt$@Preview @Composable private fun TasksEmptyContentPreview()</ID>
+    <ID>FunctionNaming:TopAppBars.kt$@Composable fun AddEditTaskTopAppBar(@StringRes title: Int, onBack: () -&gt; Unit)</ID>
+    <ID>FunctionNaming:TopAppBars.kt$@Composable fun StatisticsTopAppBar(openDrawer: () -&gt; Unit)</ID>
+    <ID>FunctionNaming:TopAppBars.kt$@Composable fun TaskDetailTopAppBar(onBack: () -&gt; Unit, onDelete: () -&gt; Unit)</ID>
+    <ID>FunctionNaming:TopAppBars.kt$@Composable fun TasksTopAppBar( openDrawer: () -&gt; Unit, onFilterAllTasks: () -&gt; Unit, onFilterActiveTasks: () -&gt; Unit, onFilterCompletedTasks: () -&gt; Unit, onClearCompletedTasks: () -&gt; Unit, onRefresh: () -&gt; Unit )</ID>
+    <ID>FunctionNaming:TopAppBars.kt$@Composable private fun FilterTasksMenu( onFilterAllTasks: () -&gt; Unit, onFilterActiveTasks: () -&gt; Unit, onFilterCompletedTasks: () -&gt; Unit )</ID>
+    <ID>FunctionNaming:TopAppBars.kt$@Composable private fun MoreTasksMenu( onClearCompletedTasks: () -&gt; Unit, onRefresh: () -&gt; Unit )</ID>
+    <ID>FunctionNaming:TopAppBars.kt$@Composable private fun TopAppBarDropdownMenu( iconContent: @Composable () -&gt; Unit, content: @Composable ColumnScope.(() -&gt; Unit) -&gt; Unit )</ID>
+    <ID>FunctionNaming:TopAppBars.kt$@Preview @Composable private fun AddEditTaskTopAppBarPreview()</ID>
+    <ID>FunctionNaming:TopAppBars.kt$@Preview @Composable private fun StatisticsTopAppBarPreview()</ID>
+    <ID>FunctionNaming:TopAppBars.kt$@Preview @Composable private fun TaskDetailTopAppBarPreview()</ID>
+    <ID>FunctionNaming:TopAppBars.kt$@Preview @Composable private fun TasksTopAppBarPreview()</ID>
+    <ID>LongParameterList:AddEditTaskScreen.kt$( @StringRes topBarTitle: Int, onTaskUpdate: () -&gt; Unit, onBack: () -&gt; Unit, modifier: Modifier = Modifier, scaffoldState: ScaffoldState = rememberScaffoldState(), viewModel: AddEditTaskViewModel = hiltViewModel() )</ID>
+    <ID>LongParameterList:AddEditTaskScreen.kt$( loading: Boolean, title: String, description: String, onTitleChanged: (String) -&gt; Unit, onDescriptionChanged: (String) -&gt; Unit, modifier: Modifier = Modifier )</ID>
+    <ID>LongParameterList:ComposeUtils.kt$( loading: Boolean, empty: Boolean, emptyContent: @Composable () -&gt; Unit, onRefresh: () -&gt; Unit, modifier: Modifier = Modifier, content: @Composable () -&gt; Unit )</ID>
+    <ID>LongParameterList:HomeNavGraph.kt$( modifier: Modifier = Modifier, navController: NavHostController = rememberNavController(), coroutineScope: CoroutineScope = rememberCoroutineScope(), drawerState: DrawerState = rememberDrawerState(initialValue = DrawerValue.Closed), startDestination: String = TodoDestinations.TASKS_ROUTE, navActions: TodoNavigationActions = remember(navController) { TodoNavigationActions(navController) } )</ID>
+    <ID>LongParameterList:StatisticsScreen.kt$( loading: Boolean, empty: Boolean, activeTasksPercent: Float, completedTasksPercent: Float, onRefresh: () -&gt; Unit, modifier: Modifier = Modifier )</ID>
+    <ID>LongParameterList:TaskDetailScreen.kt$( loading: Boolean, empty: Boolean, task: Task?, onTaskCheck: (Boolean) -&gt; Unit, onRefresh: () -&gt; Unit, modifier: Modifier = Modifier )</ID>
+    <ID>LongParameterList:TaskDetailScreen.kt$( onEditTask: (String) -&gt; Unit, onBack: () -&gt; Unit, onDeleteTask: () -&gt; Unit, modifier: Modifier = Modifier, viewModel: TaskDetailViewModel = hiltViewModel(), scaffoldState: ScaffoldState = rememberScaffoldState() )</ID>
+    <ID>LongParameterList:TasksScreen.kt$( @StringRes userMessage: Int, onAddTask: () -&gt; Unit, onTaskClick: (Task) -&gt; Unit, onUserMessageDisplayed: () -&gt; Unit, openDrawer: () -&gt; Unit, modifier: Modifier = Modifier, viewModel: TasksViewModel = hiltViewModel(), scaffoldState: ScaffoldState = rememberScaffoldState() )</ID>
+    <ID>LongParameterList:TasksScreen.kt$( loading: Boolean, tasks: List&lt;Task&gt;, @StringRes currentFilteringLabel: Int, @StringRes noTasksLabel: Int, @DrawableRes noTasksIconRes: Int, onRefresh: () -&gt; Unit, onTaskClick: (Task) -&gt; Unit, onTaskCheckedChange: (Task, Boolean) -&gt; Unit, modifier: Modifier = Modifier )</ID>
+    <ID>LongParameterList:TopAppBars.kt$( openDrawer: () -&gt; Unit, onFilterAllTasks: () -&gt; Unit, onFilterActiveTasks: () -&gt; Unit, onFilterCompletedTasks: () -&gt; Unit, onClearCompletedTasks: () -&gt; Unit, onRefresh: () -&gt; Unit )</ID>
+    <ID>MagicNumber:ComposeUtils.kt$0xFF263238</ID>
+    <ID>MagicNumber:StatisticsUtils.kt$100f</ID>
+    <ID>NewLineAtEndOfFile:DataModules.kt$com.example.android.architecture.blueprints.todoapp.di.DataModules.kt</ID>
+    <ID>SwallowedException:DefaultTaskRepository.kt$DefaultTaskRepository$e: Exception</ID>
+    <ID>TooGenericExceptionCaught:DefaultTaskRepository.kt$DefaultTaskRepository$e: Exception</ID>
+    <ID>TooGenericExceptionThrown:AddEditTaskViewModel.kt$AddEditTaskViewModel$throw RuntimeException("updateTask() was called but task is new.")</ID>
+    <ID>TooGenericExceptionThrown:DefaultTaskRepository.kt$DefaultTaskRepository$throw Exception("Task (id $taskId) not found")</ID>
+    <ID>TooManyFunctions:DefaultTaskRepository.kt$DefaultTaskRepository : TaskRepository</ID>
+    <ID>TooManyFunctions:ModelMappingExt.kt$com.example.android.architecture.blueprints.todoapp.data.ModelMappingExt.kt</ID>
+    <ID>TooManyFunctions:TaskRepository.kt$TaskRepository</ID>
+    <ID>TooManyFunctions:TopAppBars.kt$com.example.android.architecture.blueprints.todoapp.util.TopAppBars.kt</ID>
+    <ID>TopLevelPropertyNaming:CoroutinesUtils.kt$private const val StopTimeoutMillis: Long = 5000</ID>
+    <ID>UnnecessaryAbstractClass:DataModules.kt$DataSourceModule$DataSourceModule</ID>
+    <ID>UnnecessaryAbstractClass:DataModules.kt$RepositoryModule$RepositoryModule</ID>
+    <ID>UnusedPrivateMember:TaskDetailScreen.kt$@Preview @Composable private fun EditTaskContentEmptyPreview()</ID>
+    <ID>UnusedPrivateMember:TaskDetailScreen.kt$@Preview @Composable private fun EditTaskContentPreview()</ID>
+    <ID>UnusedPrivateMember:TaskDetailScreen.kt$@Preview @Composable private fun EditTaskContentTaskCompletedPreview()</ID>
+    <ID>UnusedPrivateMember:TasksScreen.kt$@Preview @Composable private fun TaskItemCompletedPreview()</ID>
+    <ID>UnusedPrivateMember:TasksScreen.kt$@Preview @Composable private fun TaskItemPreview()</ID>
+    <ID>UnusedPrivateMember:TasksScreen.kt$@Preview @Composable private fun TasksContentEmptyPreview()</ID>
+    <ID>UnusedPrivateMember:TasksScreen.kt$@Preview @Composable private fun TasksContentPreview()</ID>
+    <ID>UnusedPrivateMember:TasksScreen.kt$@Preview @Composable private fun TasksEmptyContentPreview()</ID>
+    <ID>UnusedPrivateMember:TopAppBars.kt$@Preview @Composable private fun AddEditTaskTopAppBarPreview()</ID>
+    <ID>UnusedPrivateMember:TopAppBars.kt$@Preview @Composable private fun StatisticsTopAppBarPreview()</ID>
+    <ID>UnusedPrivateMember:TopAppBars.kt$@Preview @Composable private fun TaskDetailTopAppBarPreview()</ID>
+    <ID>UnusedPrivateMember:TopAppBars.kt$@Preview @Composable private fun TasksTopAppBarPreview()</ID>
+    <ID>UseCheckOrError:SimpleCountingIdlingResource.kt$SimpleCountingIdlingResource$throw IllegalStateException("Counter has been corrupted!")</ID>
+  </CurrentIssues>
+</SmellBaseline>

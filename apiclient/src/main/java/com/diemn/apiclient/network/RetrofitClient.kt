@@ -1,5 +1,6 @@
 package com.diemn.apiclient.network
 
+import com.diemn.apiclient.extensions.Constants
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -10,14 +11,13 @@ class RetrofitClient {
         level = HttpLoggingInterceptor.Level.BODY
     }
 
-
-    private val client = OkHttpClient.Builder()
+    val client = OkHttpClient.Builder()
         .addInterceptor(loggingInterceptor)
         .build()
 
-    private val retrofit by lazy {
+    val retrofit by lazy {
         Retrofit.Builder()
-            .baseUrl(BASE_URL)
+            .baseUrl(Constants.BASE_URL)
             .client(client)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
@@ -25,9 +25,5 @@ class RetrofitClient {
 
     val apiService: ApiService by lazy {
         retrofit.create(ApiService::class.java)
-    }
-
-    companion object {
-        private const val BASE_URL = "https://moviesapi.ir/api/v1/"
     }
 }

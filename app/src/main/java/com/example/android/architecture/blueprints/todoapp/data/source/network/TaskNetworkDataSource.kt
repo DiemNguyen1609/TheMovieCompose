@@ -16,7 +16,7 @@
 
 package com.example.android.architecture.blueprints.todoapp.data.source.network
 
-import com.diemn.apiclient.network.ITheMovieRepository
+import com.diemn.apiclient.repository.ITheMovieRepository
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
