@@ -23,17 +23,17 @@ plugins {
 }
 
 android {
-    namespace = "com.example.android.architecture.blueprints.todoapp"
+    namespace = "com.themovie.app.movieapp"
     compileSdk = libs.versions.compileSdk.get().toInt()
 
     defaultConfig {
-        applicationId = "com.example.android.architecture.blueprints.main"
+        applicationId = "com.themovie.app.movieapp"
         minSdk = libs.versions.minSdk.get().toInt()
         targetSdk = libs.versions.targetSdk.get().toInt()
         versionCode = 1
         versionName = "1.0"
 
-        testInstrumentationRunner = "com.example.android.architecture.blueprints.todoapp.CustomTestRunner"
+        testInstrumentationRunner = "com.example.android.architecture.blueprints.movieapp.CustomTestRunner"
 
         javaCompileOptions {
             annotationProcessorOptions {

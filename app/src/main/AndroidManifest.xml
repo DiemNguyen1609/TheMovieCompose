@@ -24,7 +24,7 @@
         android:networkSecurityConfig="@xml/network_security_config"
         android:theme="@style/AppTheme">
         <activity
-            android:name="com.example.android.architecture.blueprints.todoapp.HomeActivity"
+            android:name="com.themovie.app.movieapp.HomeActivity"
             android:windowSoftInputMode="adjustResize"
             android:exported="true"
             android:theme="@style/AppTheme.OverlapSystemBar">

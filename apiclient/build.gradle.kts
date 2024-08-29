@@ -11,7 +11,7 @@ android {
     compileSdk = libs.versions.compileSdk.get().toInt()
 
     defaultConfig {
-        testInstrumentationRunner = "com.example.android.architecture.blueprints.todoapp.CustomTestRunner"
+        testInstrumentationRunner = "com.example.android.architecture.blueprints.movieapp.CustomTestRunner"
         vectorDrawables {
             useSupportLibrary = true
         }

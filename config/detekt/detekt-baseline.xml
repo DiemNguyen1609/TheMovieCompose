@@ -53,15 +53,15 @@
     <ID>LongParameterList:TopAppBars.kt$( openDrawer: () -&gt; Unit, onFilterAllTasks: () -&gt; Unit, onFilterActiveTasks: () -&gt; Unit, onFilterCompletedTasks: () -&gt; Unit, onClearCompletedTasks: () -&gt; Unit, onRefresh: () -&gt; Unit )</ID>
     <ID>MagicNumber:ComposeUtils.kt$0xFF263238</ID>
     <ID>MagicNumber:StatisticsUtils.kt$100f</ID>
-    <ID>NewLineAtEndOfFile:DataModules.kt$com.example.android.architecture.blueprints.todoapp.di.DataModules.kt</ID>
+    <ID>NewLineAtEndOfFile:DataModules.kt$com.example.android.architecture.blueprints.movieapp.di.DataModules.kt</ID>
     <ID>SwallowedException:DefaultTaskRepository.kt$DefaultTaskRepository$e: Exception</ID>
     <ID>TooGenericExceptionCaught:DefaultTaskRepository.kt$DefaultTaskRepository$e: Exception</ID>
     <ID>TooGenericExceptionThrown:AddEditTaskViewModel.kt$AddEditTaskViewModel$throw RuntimeException("updateTask() was called but task is new.")</ID>
     <ID>TooGenericExceptionThrown:DefaultTaskRepository.kt$DefaultTaskRepository$throw Exception("Task (id $taskId) not found")</ID>
     <ID>TooManyFunctions:DefaultTaskRepository.kt$DefaultTaskRepository : TaskRepository</ID>
-    <ID>TooManyFunctions:ModelMappingExt.kt$com.example.android.architecture.blueprints.todoapp.data.ModelMappingExt.kt</ID>
+    <ID>TooManyFunctions:ModelMappingExt.kt$com.example.android.architecture.blueprints.movieapp.data.ModelMappingExt.kt</ID>
     <ID>TooManyFunctions:TaskRepository.kt$TaskRepository</ID>
-    <ID>TooManyFunctions:TopAppBars.kt$com.example.android.architecture.blueprints.todoapp.util.TopAppBars.kt</ID>
+    <ID>TooManyFunctions:TopAppBars.kt$com.example.android.architecture.blueprints.movieapp.util.TopAppBars.kt</ID>
     <ID>TopLevelPropertyNaming:CoroutinesUtils.kt$private const val StopTimeoutMillis: Long = 5000</ID>
     <ID>UnnecessaryAbstractClass:DataModules.kt$DataSourceModule$DataSourceModule</ID>
     <ID>UnnecessaryAbstractClass:DataModules.kt$RepositoryModule$RepositoryModule</ID>
