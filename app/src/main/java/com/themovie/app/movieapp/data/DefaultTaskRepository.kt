@@ -16,10 +16,14 @@
 
 package com.themovie.app.movieapp.data
 
+import androidx.paging.Pager
+import androidx.paging.PagingData
+import androidx.paging.map
 import com.themovie.app.movieapp.data.source.local.TaskDao
 import com.themovie.app.movieapp.data.source.network.NetworkDataSource
 import com.themovie.app.movieapp.di.ApplicationScope
 import com.themovie.app.movieapp.di.DefaultDispatcher
+import com.themovie.app.movieapp.presentation.base.paging.BasePagingSource
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
@@ -83,10 +87,16 @@ class DefaultTaskRepository @Inject constructor(
         }
     }
 
-    override fun getTasksStream(): Flow<List<Task>> {
-        return localDataSource.observeAll().map { tasks ->
-            withContext(dispatcher) {
-                tasks.toExternal()
+    override fun getTasksStream(): Flow<PagingData<Task>> {
+        return Pager(
+            config = BasePagingSource.getDefaultPageConfig(pageSize = 1)
+        ) {
+            localDataSource.observeAll()
+        }.flow.map { pagingData ->
+            pagingData.map { tasks ->
+                withContext(dispatcher) {
+                    tasks.toExternal()
+                }
             }
         }
     }

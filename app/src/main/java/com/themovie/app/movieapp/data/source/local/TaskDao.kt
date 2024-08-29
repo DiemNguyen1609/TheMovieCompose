@@ -16,6 +16,8 @@
 
 package com.themovie.app.movieapp.data.source.local
 
+import androidx.paging.PagingData
+import androidx.paging.PagingSource
 import androidx.room.Dao
 import androidx.room.Query
 import androidx.room.Upsert
@@ -33,7 +35,7 @@ interface TaskDao {
      * @return all tasks.
      */
     @Query("SELECT * FROM task")
-    fun observeAll(): Flow<List<LocalTask>>
+    fun observeAll(): PagingSource<Int, LocalTask>
 
     /**
      * Observes a single task.

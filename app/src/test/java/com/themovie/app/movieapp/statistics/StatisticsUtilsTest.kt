@@ -17,7 +17,7 @@
 package com.themovie.app.movieapp.statistics
 
 import com.themovie.app.movieapp.data.Task
-import com.themovie.app.movieapp.presentation.ui.getActiveAndCompletedStats
+import com.themovie.app.movieapp.presentation.ui.statistics.getActiveAndCompletedStats
 import org.hamcrest.core.Is.`is`
 import org.junit.Assert.assertThat
 import org.junit.Test

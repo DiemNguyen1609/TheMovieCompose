@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.themovie.app.movieapp.presentation.ui
+package com.themovie.app.movieapp.presentation.ui.statistics
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -32,7 +32,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.themovie.app.movieapp.util.LoadingContent
-import com.themovie.app.movieapp.util.StatisticsTopAppBar
+import com.themovie.app.movieapp.presentation.base.StatisticsTopAppBar
 import com.google.accompanist.appcompattheme.AppCompatTheme
 import com.themovie.app.movieapp.R
 

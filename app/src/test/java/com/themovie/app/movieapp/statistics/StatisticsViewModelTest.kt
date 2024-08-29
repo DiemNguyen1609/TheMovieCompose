@@ -17,7 +17,7 @@
 package com.themovie.app.movieapp.statistics
 
 import com.themovie.app.movieapp.data.Task
-import com.themovie.app.movieapp.presentation.ui.StatisticsViewModel
+import com.themovie.app.movieapp.presentation.ui.statistics.StatisticsViewModel
 import com.themovie.app.movieapp.MainCoroutineRule
 import com.themovie.app.movieapp.data.FakeTaskRepository
 import com.google.common.truth.Truth.assertThat

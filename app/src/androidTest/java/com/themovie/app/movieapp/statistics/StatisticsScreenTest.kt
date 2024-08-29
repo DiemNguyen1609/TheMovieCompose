@@ -25,8 +25,8 @@ import androidx.test.filters.MediumTest
 import com.themovie.app.movieapp.HiltTestActivity
 import com.themovie.app.movieapp.R
 import com.themovie.app.movieapp.data.TaskRepository
-import com.themovie.app.movieapp.presentation.ui.StatisticsScreen
-import com.themovie.app.movieapp.presentation.ui.StatisticsViewModel
+import com.themovie.app.movieapp.presentation.ui.statistics.StatisticsScreen
+import com.themovie.app.movieapp.presentation.ui.statistics.StatisticsViewModel
 import com.google.accompanist.appcompattheme.AppCompatTheme
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest

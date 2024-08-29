@@ -36,10 +36,10 @@ import com.themovie.app.movieapp.TheMovieDestinationsArgs.TASK_ID_ARG
 import com.themovie.app.movieapp.TheMovieDestinationsArgs.TITLE_ARG
 import com.themovie.app.movieapp.TheMovieDestinationsArgs.USER_MESSAGE_ARG
 import com.themovie.app.movieapp.presentation.ui.addedittask.AddEditTaskScreen
-import com.themovie.app.movieapp.presentation.ui.StatisticsScreen
+import com.themovie.app.movieapp.presentation.ui.statistics.StatisticsScreen
 import com.themovie.app.movieapp.presentation.ui.taskdetail.TaskDetailScreen
 import com.themovie.app.movieapp.presentation.ui.tasks.TasksScreen
-import com.themovie.app.movieapp.util.AppModalDrawer
+import com.themovie.app.movieapp.presentation.base.AppModalDrawer
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 

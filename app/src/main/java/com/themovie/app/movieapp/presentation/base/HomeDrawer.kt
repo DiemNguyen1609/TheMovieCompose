@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.themovie.app.movieapp.util
+package com.themovie.app.movieapp.presentation.base
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -34,6 +34,7 @@ import com.themovie.app.movieapp.R
 import com.themovie.app.movieapp.TheMovieDestinations
 import com.themovie.app.movieapp.TheMovieNavigationActions
 import com.google.accompanist.appcompattheme.AppCompatTheme
+import com.themovie.app.movieapp.util.primaryDarkColor
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 

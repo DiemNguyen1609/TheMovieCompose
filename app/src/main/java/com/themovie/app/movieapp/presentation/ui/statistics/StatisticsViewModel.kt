@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.themovie.app.movieapp.presentation.ui
+package com.themovie.app.movieapp.presentation.ui.statistics
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

@@ -48,6 +48,7 @@ lint = "31.5.2"
 # @keep
 minSdk = "21"
 okhttp = "4.12.0"
+paging = "3.1.1"
 protobuf = "3.21.12"
 protobufPlugin = "0.8.19"
 retrofit = "2.9.0"
@@ -145,6 +146,8 @@ room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
 room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
 room-testing = { group = "androidx.room", name = "room-testing", version.ref = "room" }
 timber = { group = "com.jakewharton.timber", name = "timber", version.ref = "timber" }
+paging-compose = { group = "androidx.paging", name = "paging-compose", version.ref = "paging" }
+paging-runtime = { group = "androidx.paging", name = "paging-runtime", version.ref = "paging" }
 
 # Dependencies of the included build-logic
 android-gradlePlugin = { group = "com.android.tools.build", name = "gradle", version.ref = "androidGradlePlugin" }

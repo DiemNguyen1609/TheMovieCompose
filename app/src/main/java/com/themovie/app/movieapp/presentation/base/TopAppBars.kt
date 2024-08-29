@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.themovie.app.movieapp.util
+package com.themovie.app.movieapp.presentation.base
 
 import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.Box

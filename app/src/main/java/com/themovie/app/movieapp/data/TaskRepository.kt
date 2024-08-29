@@ -16,6 +16,7 @@
 
 package com.themovie.app.movieapp.data
 
+import androidx.paging.PagingData
 import kotlinx.coroutines.flow.Flow
 
 /**
@@ -23,7 +24,7 @@ import kotlinx.coroutines.flow.Flow
  */
 interface TaskRepository {
 
-    fun getTasksStream(): Flow<List<Task>>
+    fun getTasksStream(): Flow<PagingData<Task>>
 
     suspend fun getTasks(forceUpdate: Boolean = false): List<Task>
 

@@ -34,7 +34,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.themovie.app.movieapp.R
 import com.themovie.app.movieapp.data.Task
 import com.themovie.app.movieapp.util.LoadingContent
-import com.themovie.app.movieapp.util.TaskDetailTopAppBar
+import com.themovie.app.movieapp.presentation.base.TaskDetailTopAppBar
 import com.google.accompanist.appcompattheme.AppCompatTheme
 
 @Composable

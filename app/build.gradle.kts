@@ -201,6 +201,10 @@ dependencies {
     // AndroidX Test - Hilt testing
     androidTestImplementation(libs.hilt.android.testing)
     kaptAndroidTest(libs.hilt.compiler)
+
+    // Paging
+    implementation(libs.paging.compose)
+    implementation(libs.paging.runtime)
 }
 
 apply (from = "../config/detekt/detekt.gradle")
