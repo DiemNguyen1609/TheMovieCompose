@@ -1,1 +1,7 @@
 # TheMovieJetpackCompose
+
+https://www.figma.com/design/BDUysk6VjIQHrVTKclpFtx/Movie-Streaming-App-(Community)?node-id=0-1&node-type=CANVAS&t=EGyDpKyVO9U3xwgA-0
+
+https://www.figma.com/design/QS1RN05wkezi6VM2nwl26p/Cinemax---Movie-Apps-UI-Kit-(Community)?node-id=5-2&node-type=CANVAS&t=0S611NgS3i5CEp8w-0
+
+https://www.figma.com/design/gzMempcbJldTKlQZ5Gu3UQ/Movie-Mobile-App-UI-Design-(Community)?node-id=0-1&node-type=CANVAS&t=yf2dBSEOllTF8SlE-0
