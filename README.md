@@ -10,3 +10,7 @@ https://www.figma.com/design/FNMdi7RWMSnPppERkgARXI/Movie?node-id=0-1&node-type=
 
 
 https://github.com/BrokenEmpire/YTS/blob/master/API.md
+
+https://ww4.yts.nz/api
+
+[Watchmode API](https://api.watchmode.com/dashboard/)
