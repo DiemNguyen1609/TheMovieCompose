@@ -20,7 +20,6 @@ import androidx.lifecycle.SavedStateHandle
 import com.themovie.app.movieapp.ADD_EDIT_RESULT_OK
 import com.themovie.app.movieapp.DELETE_RESULT_OK
 import com.themovie.app.movieapp.EDIT_RESULT_OK
-import com.themovie.app.movieapp.data.Task
 import com.themovie.app.movieapp.presentation.ui.tasks.TasksFilterType
 import com.themovie.app.movieapp.presentation.ui.tasks.TasksViewModel
 import com.themovie.app.movieapp.MainCoroutineRule

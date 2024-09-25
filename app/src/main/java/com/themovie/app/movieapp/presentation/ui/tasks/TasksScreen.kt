@@ -40,17 +40,17 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.themovie.app.movieapp.R
-import com.themovie.app.movieapp.data.Task
-import com.themovie.app.movieapp.util.LoadingContent
-import com.themovie.app.movieapp.presentation.base.TasksTopAppBar
 import com.google.accompanist.appcompattheme.AppCompatTheme
+import com.themovie.app.movieapp.R
+import com.themovie.app.movieapp.data.source.network.DTOMovie
+import com.themovie.app.movieapp.presentation.base.TasksTopAppBar
+import com.themovie.app.movieapp.util.LoadingContent
 
 @Composable
 fun TasksScreen(
     @StringRes userMessage: Int,
     onAddTask: () -> Unit,
-    onTaskClick: (Task) -> Unit,
+    onTaskClick: (DTOMovie) -> Unit,
     onUserMessageDisplayed: () -> Unit,
     openDrawer: () -> Unit,
     modifier: Modifier = Modifier,
@@ -65,7 +65,6 @@ fun TasksScreen(
                 onFilterAllTasks = { viewModel.setFiltering(TasksFilterType.ALL_TASKS) },
                 onFilterActiveTasks = { viewModel.setFiltering(TasksFilterType.ACTIVE_TASKS) },
                 onFilterCompletedTasks = { viewModel.setFiltering(TasksFilterType.COMPLETED_TASKS) },
-                onClearCompletedTasks = { viewModel.clearCompletedTasks() },
                 onRefresh = { viewModel.refresh() }
             )
         },
@@ -86,7 +85,6 @@ fun TasksScreen(
             noTasksIconRes = uiState.filteringUiInfo.noTaskIconRes,
             onRefresh = viewModel::refresh,
             onTaskClick = onTaskClick,
-            onTaskCheckedChange = viewModel::completeTask,
             modifier = Modifier.padding(paddingValues)
         )
 
@@ -113,13 +111,12 @@ fun TasksScreen(
 @Composable
 private fun TasksContent(
     loading: Boolean,
-    tasks: List<Task>,
+    tasks: List<DTOMovie>,
     @StringRes currentFilteringLabel: Int,
     @StringRes noTasksLabel: Int,
     @DrawableRes noTasksIconRes: Int,
     onRefresh: () -> Unit,
-    onTaskClick: (Task) -> Unit,
-    onTaskCheckedChange: (Task, Boolean) -> Unit,
+    onTaskClick: (DTOMovie) -> Unit,
     modifier: Modifier = Modifier
 ) {
     LoadingContent(
@@ -146,7 +143,6 @@ private fun TasksContent(
                     TaskItem(
                         task = task,
                         onTaskClick = onTaskClick,
-                        onCheckedChange = { onTaskCheckedChange(task, it) }
                     )
                 }
             }
@@ -156,9 +152,8 @@ private fun TasksContent(
 
 @Composable
 private fun TaskItem(
-    task: Task,
-    onCheckedChange: (Boolean) -> Unit,
-    onTaskClick: (Task) -> Unit
+    task: DTOMovie,
+    onTaskClick: (DTOMovie) -> Unit
 ) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
@@ -170,21 +165,13 @@ private fun TaskItem(
             )
             .clickable { onTaskClick(task) }
     ) {
-        Checkbox(
-            checked = task.isCompleted,
-            onCheckedChange = onCheckedChange
-        )
         Text(
-            text = task.titleForList,
+            text = task.title,
             style = MaterialTheme.typography.h6,
             modifier = Modifier.padding(
                 start = dimensionResource(id = R.dimen.horizontal_margin)
             ),
-            textDecoration = if (task.isCompleted) {
-                TextDecoration.LineThrough
-            } else {
-                null
-            }
+            textDecoration = TextDecoration.LineThrough
         )
     }
 }
@@ -217,34 +204,25 @@ private fun TasksContentPreview() {
             TasksContent(
                 loading = false,
                 tasks = listOf(
-                    Task(
+                    DTOMovie(
                         title = "Title 1",
-                        description = "Description 1",
-                        isCompleted = false,
                         id = "ID 1"
                     ),
-                    Task(
+                    DTOMovie(
                         title = "Title 2",
-                        description = "Description 2",
-                        isCompleted = true,
                         id = "ID 2"
                     ),
-                    Task(
+                    DTOMovie(
                         title = "Title 3",
-                        description = "Description 3",
-                        isCompleted = true,
                         id = "ID 3"
                     ),
-                    Task(
+                    DTOMovie(
                         title = "Title 4",
-                        description = "Description 4",
-                        isCompleted = false,
                         id = "ID 4"
                     ),
-                    Task(
+                    DTOMovie(
                         title = "Title 5",
-                        description = "Description 5",
-                        isCompleted = true,
+
                         id = "ID 5"
                     ),
                 ),
@@ -252,8 +230,7 @@ private fun TasksContentPreview() {
                 noTasksLabel = R.string.no_tasks_all,
                 noTasksIconRes = R.drawable.logo_no_fill,
                 onRefresh = { },
-                onTaskClick = { },
-                onTaskCheckedChange = { _, _ -> },
+                onTaskClick = {}
             )
         }
     }
@@ -271,8 +248,7 @@ private fun TasksContentEmptyPreview() {
                 noTasksLabel = R.string.no_tasks_all,
                 noTasksIconRes = R.drawable.logo_no_fill,
                 onRefresh = { },
-                onTaskClick = { },
-                onTaskCheckedChange = { _, _ -> },
+                onTaskClick = {}
             )
         }
     }
@@ -297,13 +273,12 @@ private fun TaskItemPreview() {
     AppCompatTheme {
         Surface {
             TaskItem(
-                task = Task(
+                task = DTOMovie(
                     title = "Title",
-                    description = "Description",
+
                     id = "ID"
                 ),
                 onTaskClick = { },
-                onCheckedChange = { }
             )
         }
     }
@@ -315,14 +290,11 @@ private fun TaskItemCompletedPreview() {
     AppCompatTheme {
         Surface {
             TaskItem(
-                task = Task(
+                task = DTOMovie(
                     title = "Title",
-                    description = "Description",
-                    isCompleted = true,
                     id = "ID"
                 ),
                 onTaskClick = { },
-                onCheckedChange = { }
             )
         }
     }

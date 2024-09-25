@@ -16,19 +16,16 @@
 
 package com.themovie.app.movieapp.data.source.network
 
-import com.themovie.app.movieapp.data.source.network.NetworkDataSource
-import com.themovie.app.movieapp.data.source.network.NetworkTask
-
 class FakeNetworkDataSource(
-    var tasks: MutableList<NetworkTask>? = mutableListOf()
+    var tasks: MutableList<DTOMovie>? = mutableListOf()
 ) : NetworkDataSource {
 
 
-    override suspend fun loadTasks() :List<NetworkTask> {
+    override suspend fun loadTasks() :List<DTOMovie> {
         return tasks ?: throw Exception("Task list is null")
     }
 
-    override suspend fun saveTasks(tasks: List<NetworkTask>) {
+    override suspend fun saveTasks(tasks: List<DTOMovie>) {
         this.tasks = tasks.toMutableList()
     }
 }

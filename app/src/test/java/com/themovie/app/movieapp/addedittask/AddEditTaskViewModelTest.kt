@@ -18,7 +18,6 @@ package com.themovie.app.movieapp.addedittask
 
 import androidx.lifecycle.SavedStateHandle
 import com.themovie.app.movieapp.TheMovieDestinationsArgs
-import com.themovie.app.movieapp.data.Task
 import com.themovie.app.movieapp.presentation.ui.addedittask.AddEditTaskViewModel
 import com.themovie.app.movieapp.MainCoroutineRule
 import com.themovie.app.movieapp.R.string

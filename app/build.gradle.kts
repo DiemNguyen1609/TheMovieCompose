@@ -38,6 +38,7 @@ android {
         javaCompileOptions {
             annotationProcessorOptions {
                 arguments += "room.incremental" to "true"
+                arguments += "room.schemaLocation" to "$projectDir/schemas"
             }
         }
     }
@@ -123,6 +124,7 @@ dependencies {
     implementation(libs.androidx.test.espresso.idling.resources)
 
     // Architecture Components
+    implementation(libs.room.paging)
     implementation(libs.room.runtime)
     implementation(libs.room.ktx)
     ksp(libs.room.compiler)
@@ -150,6 +152,9 @@ dependencies {
     implementation(libs.androidx.lifecycle.viewModelCompose)
     implementation(libs.accompanist.appcompat.theme)
     implementation(libs.accompanist.swiperefresh)
+    implementation(libs.coil.kt)
+    implementation(libs.coil.kt.svg)
+    implementation(libs.coil.kt.compose)
 
     debugImplementation(composeBom)
     debugImplementation(libs.androidx.compose.ui.tooling.core)

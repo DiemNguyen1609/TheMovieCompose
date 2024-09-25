@@ -48,19 +48,19 @@ class TaskDaoTest {
     @Test
     fun insertTaskAndGetById() = runTest {
         // GIVEN - insert a task
-        val task = LocalTask(
+        val task = LocalMovie(
             title = "title",
             description = "description",
             id = "id",
             isCompleted = false,
         )
-        database.taskDao().upsert(task)
+        database.theMovieDao().upsert(task)
 
         // WHEN - Get the task by id from the database
-        val loaded = database.taskDao().getById(task.id)
+        val loaded = database.theMovieDao().getById(task.id)
 
         // THEN - The loaded data contains the expected values
-        assertNotNull(loaded as LocalTask)
+        assertNotNull(loaded as LocalMovie)
         assertEquals(task.id, loaded.id)
         assertEquals(task.title, loaded.title)
         assertEquals(task.description, loaded.description)
@@ -70,25 +70,25 @@ class TaskDaoTest {
     @Test
     fun insertTaskReplacesOnConflict() = runTest {
         // Given that a task is inserted
-        val task = LocalTask(
+        val task = LocalMovie(
             title = "title",
             description = "description",
             id = "id",
             isCompleted = false,
         )
-        database.taskDao().upsert(task)
+        database.theMovieDao().upsert(task)
 
         // When a task with the same id is inserted
-        val newTask = LocalTask(
+        val newTask = LocalMovie(
             title = "title2",
             description = "description2",
             isCompleted = true,
             id = task.id
         )
-        database.taskDao().upsert(newTask)
+        database.theMovieDao().upsert(newTask)
 
         // THEN - The loaded data contains the expected values
-        val loaded = database.taskDao().getById(task.id)
+        val loaded = database.theMovieDao().getById(task.id)
         assertEquals(task.id, loaded?.id)
         assertEquals("title2", loaded?.title)
         assertEquals("description2", loaded?.description)
@@ -98,16 +98,16 @@ class TaskDaoTest {
     @Test
     fun insertTaskAndGetTasks() = runTest {
         // GIVEN - insert a task
-        val task = LocalTask(
+        val task = LocalMovie(
             title = "title",
             description = "description",
             id = "id",
             isCompleted = false,
         )
-        database.taskDao().upsert(task)
+        database.theMovieDao().upsert(task)
 
         // WHEN - Get tasks from the database
-        val tasks = database.taskDao().getAll()
+        val tasks = database.theMovieDao().getAll()
 
         // THEN - There is only 1 task in the database, and contains the expected values
         assertEquals(1, tasks.size)
@@ -120,26 +120,26 @@ class TaskDaoTest {
     @Test
     fun updateTaskAndGetById() = runTest {
         // When inserting a task
-        val originalTask = LocalTask(
+        val originalTask = LocalMovie(
             title = "title",
             description = "description",
             id = "id",
             isCompleted = false,
         )
 
-        database.taskDao().upsert(originalTask)
+        database.theMovieDao().upsert(originalTask)
 
         // When the task is updated
-        val updatedTask = LocalTask(
+        val updatedTask = LocalMovie(
             title = "new title",
             description = "new description",
             isCompleted = true,
             id = originalTask.id
         )
-        database.taskDao().upsert(updatedTask)
+        database.theMovieDao().upsert(updatedTask)
 
         // THEN - The loaded data contains the expected values
-        val loaded = database.taskDao().getById(originalTask.id)
+        val loaded = database.theMovieDao().getById(originalTask.id)
         assertEquals(originalTask.id, loaded?.id)
         assertEquals("new title", loaded?.title)
         assertEquals("new description", loaded?.description)
@@ -149,19 +149,19 @@ class TaskDaoTest {
     @Test
     fun updateCompletedAndGetById() = runTest {
         // When inserting a task
-        val task = LocalTask(
+        val task = LocalMovie(
             title = "title",
             description = "description",
             id = "id",
             isCompleted = true
         )
-        database.taskDao().upsert(task)
+        database.theMovieDao().upsert(task)
 
         // When the task is updated
-        database.taskDao().updateCompleted(task.id, false)
+        database.theMovieDao().updateCompleted(task.id, false)
 
         // THEN - The loaded data contains the expected values
-        val loaded = database.taskDao().getById(task.id)
+        val loaded = database.theMovieDao().getById(task.id)
         assertEquals(task.id, loaded?.id)
         assertEquals(task.title, loaded?.title)
         assertEquals(task.description, loaded?.description)
@@ -171,27 +171,27 @@ class TaskDaoTest {
     @Test
     fun deleteTaskByIdAndGettingTasks() = runTest {
         // Given a task inserted
-        val task = LocalTask(
+        val task = LocalMovie(
             title = "title",
             description = "description",
             id = "id",
             isCompleted = false,
         )
-        database.taskDao().upsert(task)
+        database.theMovieDao().upsert(task)
 
         // When deleting a task by id
-        database.taskDao().deleteById(task.id)
+        database.theMovieDao().deleteById(task.id)
 
         // THEN - The list is empty
-        val tasks = database.taskDao().getAll()
+        val tasks = database.theMovieDao().getAll()
         assertEquals(true, tasks.isEmpty())
     }
 
     @Test
     fun deleteTasksAndGettingTasks() = runTest {
         // Given a task inserted
-        database.taskDao().upsert(
-            LocalTask(
+        database.theMovieDao().upsert(
+            LocalMovie(
                 title = "title",
                 description = "description",
                 id = "id",
@@ -200,25 +200,25 @@ class TaskDaoTest {
         )
 
         // When deleting all tasks
-        database.taskDao().deleteAll()
+        database.theMovieDao().deleteAll()
 
         // THEN - The list is empty
-        val tasks = database.taskDao().getAll()
+        val tasks = database.theMovieDao().getAll()
         assertEquals(true, tasks.isEmpty())
     }
 
     @Test
     fun deleteCompletedTasksAndGettingTasks() = runTest {
         // Given a completed task inserted
-        database.taskDao().upsert(
-            LocalTask(title = "completed", description = "task", id = "id", isCompleted = true)
+        database.theMovieDao().upsert(
+            LocalMovie(title = "completed", description = "task", id = "id", isCompleted = true)
         )
 
         // When deleting completed tasks
-        database.taskDao().deleteCompleted()
+        database.theMovieDao().deleteCompleted()
 
         // THEN - The list is empty
-        val tasks = database.taskDao().getAll()
+        val tasks = database.theMovieDao().getAll()
         assertEquals(true, tasks.isEmpty())
     }
 }

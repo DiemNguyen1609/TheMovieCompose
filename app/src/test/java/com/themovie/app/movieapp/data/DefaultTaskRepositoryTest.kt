@@ -19,8 +19,6 @@ package com.themovie.app.movieapp.data
 import com.themovie.app.movieapp.data.source.local.FakeTaskDao
 import com.themovie.app.movieapp.data.source.network.FakeNetworkDataSource
 import com.google.common.truth.Truth.assertThat
-import com.themovie.app.movieapp.data.DefaultTaskRepository
-import com.themovie.app.movieapp.data.Task
 import com.themovie.app.movieapp.data.toLocal
 import com.themovie.app.movieapp.data.toNetwork
 import junit.framework.TestCase.assertEquals

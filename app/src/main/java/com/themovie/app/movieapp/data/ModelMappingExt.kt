@@ -16,9 +16,9 @@
 
 package com.themovie.app.movieapp.data
 
-import com.themovie.app.movieapp.data.source.local.LocalTask
-import com.themovie.app.movieapp.data.source.network.NetworkTask
-import com.themovie.app.movieapp.data.source.network.TaskStatus
+import com.diemn.apiclient.response.MovieItemResponse
+import com.themovie.app.movieapp.data.source.local.LocalMovie
+import com.themovie.app.movieapp.data.source.network.DTOMovie
 
 /**
  * Data model mapping extension functions. There are three model types:
@@ -34,59 +34,50 @@ import com.themovie.app.movieapp.data.source.network.TaskStatus
  *
  */
 
-// External to local
-fun Task.toLocal() = LocalTask(
+// External to Local
+fun DTOMovie.toLocal() = LocalMovie(
     id = id,
     title = title,
-    description = description,
-    isCompleted = isCompleted,
+    poster = poster,
+    year = year,
+    country = country,
+    imdbRating = imdbRating
 )
 
-fun List<Task>.toLocal() = map(Task::toLocal)
+@JvmName("externalToLocal")
+fun List<DTOMovie>.toLocal() = map(DTOMovie::toLocal)
 
 // Local to External
-fun LocalTask.toExternal() = Task(
+fun LocalMovie.toExternal() = DTOMovie(
     id = id,
     title = title,
-    description = description,
-    isCompleted = isCompleted,
+    poster = poster,
+    year = year,
+    country = country,
+    imdbRating = imdbRating
 )
 
 // Note: JvmName is used to provide a unique name for each extension function with the same name.
 // Without this, type erasure will cause compiler errors because these methods will have the same
 // signature on the JVM.
 @JvmName("localToExternal")
-fun List<LocalTask>.toExternal() = map(LocalTask::toExternal)
+fun List<LocalMovie>.toExternal() = map(LocalMovie::toExternal)
 
 // Network to Local
-fun NetworkTask.toLocal() = LocalTask(
-    id = id,
-    title = title,
-    description = shortDescription,
-    isCompleted = (status == TaskStatus.COMPLETE),
+fun MovieItemResponse.toLocal() = LocalMovie(
+    id = id ?: "",
+    title = title ?: "",
+    poster = poster,
+    year = year,
+    country = country,
+    imdbRating = imdbRating
 )
 
 @JvmName("networkToLocal")
-fun List<NetworkTask>.toLocal() = map(NetworkTask::toLocal)
-
-// Local to Network
-fun LocalTask.toNetwork() = NetworkTask(
-    id = id,
-    title = title,
-    shortDescription = description,
-    status = if (isCompleted) { com.themovie.app.movieapp.data.source.network.TaskStatus.COMPLETE } else { com.themovie.app.movieapp.data.source.network.TaskStatus.ACTIVE }
-)
-
-fun List<LocalTask>.toNetwork() = map(LocalTask::toNetwork)
-
-// External to Network
-fun Task.toNetwork() = toLocal().toNetwork()
-
-@JvmName("externalToNetwork")
-fun List<Task>.toNetwork() = map(Task::toNetwork)
+fun List<MovieItemResponse>.toLocal() = map(MovieItemResponse::toLocal)
 
 // Network to External
-fun NetworkTask.toExternal() = toLocal().toExternal()
+fun MovieItemResponse.toExternal() = toLocal().toExternal()
 
 @JvmName("networkToExternal")
-fun List<NetworkTask>.toExternal() = map(NetworkTask::toExternal)
+fun List<MovieItemResponse>.toExternal() = map(MovieItemResponse::toExternal)

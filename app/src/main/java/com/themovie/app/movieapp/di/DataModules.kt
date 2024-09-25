@@ -20,7 +20,7 @@ import android.content.Context
 import androidx.room.Room
 import com.themovie.app.movieapp.data.DefaultTaskRepository
 import com.themovie.app.movieapp.data.TaskRepository
-import com.themovie.app.movieapp.data.source.local.TaskDao
+import com.themovie.app.movieapp.data.source.local.TheMovieDao
 import com.themovie.app.movieapp.data.source.local.TheMovieDatabase
 import com.themovie.app.movieapp.data.source.network.NetworkDataSource
 import com.themovie.app.movieapp.data.source.network.TaskNetworkDataSource
@@ -60,10 +60,10 @@ object DatabaseModule {
         return Room.databaseBuilder(
             context.applicationContext,
             TheMovieDatabase::class.java,
-            "Tasks.db"
+            "TheMovie.db"
         ).build()
     }
 
     @Provides
-    fun provideTaskDao(database: TheMovieDatabase): TaskDao = database.taskDao()
+    fun provideTaskDao(database: TheMovieDatabase): TheMovieDao = database.theMovieDao()
 }

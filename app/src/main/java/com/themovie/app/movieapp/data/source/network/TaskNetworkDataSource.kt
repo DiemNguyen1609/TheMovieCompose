@@ -17,6 +17,7 @@
 package com.themovie.app.movieapp.data.source.network
 
 import com.diemn.apiclient.repository.ITheMovieRepository
+import com.diemn.apiclient.response.MovieItemResponse
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
@@ -29,34 +30,30 @@ class TaskNetworkDataSource @Inject constructor(
     // A mutex is used to ensure that reads and writes are thread-safe.
     private val accessMutex = Mutex()
     private var tasks = listOf(
-        NetworkTask(
+        DTOMovie(
             id = "PISA",
             title = "Build tower in Pisa",
-            shortDescription = "Ground looks good, no foundation work required."
+            poster = ""
         ),
-        NetworkTask(
+        DTOMovie(
             id = "TACOMA",
             title = "Finish bridge in Tacoma",
-            shortDescription = "Found awesome girders at half the cost!"
+            poster = ""
         )
     )
 
-    override suspend fun loadTasks(): List<NetworkTask> = accessMutex.withLock {
-        val taskResponse = mutableListOf<NetworkTask>()
-        iTheMovieRepository.getListMovie(page = 1).data?.map {
-            taskResponse.add(
-                NetworkTask(
-                    id = it.id.toString(),
-                    title = it.title ?: "",
-                    shortDescription = it.country ?: ""
-                )
-            )
+    override suspend fun loadTasks(): List<MovieItemResponse> = accessMutex.withLock {
+        val taskResponse = try {
+            iTheMovieRepository.getListMovie(page = 1).data
+        } catch (e: Exception) {
+            println(e)
+            emptyList()
         }
         delay(SERVICE_LATENCY_IN_MILLIS)
-        return taskResponse
+        return taskResponse ?: emptyList()
     }
 
-    override suspend fun saveTasks(newTasks: List<NetworkTask>) = accessMutex.withLock {
+    override suspend fun saveTasks(newTasks: List<DTOMovie>) = accessMutex.withLock {
         delay(SERVICE_LATENCY_IN_MILLIS)
         tasks = newTasks
     }

@@ -21,8 +21,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.themovie.app.movieapp.R
 import com.themovie.app.movieapp.TheMovieDestinationsArgs
-import com.themovie.app.movieapp.data.Task
 import com.themovie.app.movieapp.data.TaskRepository
+import com.themovie.app.movieapp.data.source.network.DTOMovie
 import com.themovie.app.movieapp.util.Async
 import com.themovie.app.movieapp.util.WhileUiSubscribed
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -34,7 +34,7 @@ import javax.inject.Inject
  * UiState for the Details screen.
  */
 data class TaskDetailUiState(
-    val task: Task? = null,
+    val task: DTOMovie? = null,
     val isLoading: Boolean = false,
     val userMessage: Int? = null,
     val isTaskDeleted: Boolean = false
@@ -92,17 +92,6 @@ class TaskDetailViewModel @Inject constructor(
         _isTaskDeleted.value = true
     }
 
-    fun setCompleted(completed: Boolean) = viewModelScope.launch {
-        val task = uiState.value.task ?: return@launch
-        if (completed) {
-            taskRepository.completeTask(task.id)
-            showSnackbarMessage(R.string.task_marked_complete)
-        } else {
-            taskRepository.activateTask(task.id)
-            showSnackbarMessage(R.string.task_marked_active)
-        }
-    }
-
     fun refresh() {
         _isLoading.value = true
         viewModelScope.launch {
@@ -119,7 +108,7 @@ class TaskDetailViewModel @Inject constructor(
         _userMessage.value = message
     }
 
-    private fun handleTask(task: Task?): Async<Task?> {
+    private fun handleTask(task: DTOMovie?): Async<DTOMovie?> {
         if (task == null) {
             return Async.Error(R.string.task_not_found)
         }

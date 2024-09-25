@@ -24,8 +24,8 @@ import androidx.room.RoomDatabase
  *
  * Note that exportSchema should be true in production databases.
  */
-@Database(entities = [LocalTask::class], version = 1, exportSchema = false)
+@Database(entities = [LocalMovie::class], version = 1, exportSchema = false)
 abstract class TheMovieDatabase : RoomDatabase() {
 
-    abstract fun taskDao(): TaskDao
+    abstract fun theMovieDao(): TheMovieDao
 }

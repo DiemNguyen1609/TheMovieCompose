@@ -23,8 +23,8 @@ import com.themovie.app.movieapp.ADD_EDIT_RESULT_OK
 import com.themovie.app.movieapp.DELETE_RESULT_OK
 import com.themovie.app.movieapp.EDIT_RESULT_OK
 import com.themovie.app.movieapp.R
-import com.themovie.app.movieapp.data.Task
 import com.themovie.app.movieapp.data.TaskRepository
+import com.themovie.app.movieapp.data.source.network.DTOMovie
 import com.themovie.app.movieapp.util.Async
 import com.themovie.app.movieapp.util.WhileUiSubscribed
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -36,7 +36,7 @@ import javax.inject.Inject
  * UiState for the task list screen.
  */
 data class TasksUiState(
-    val items: List<Task> = emptyList(),
+    val items: List<DTOMovie> = emptyList(),
     val isLoading: Boolean = false,
     val filteringUiInfo: FilteringUiInfo = FilteringUiInfo(),
     val userMessage: Int? = null
@@ -58,11 +58,11 @@ class TasksViewModel @Inject constructor(
     private val _userMessage: MutableStateFlow<Int?> = MutableStateFlow(null)
     private val _isLoading = MutableStateFlow(false)
     private val _filteredTasksAsync =
-        combine(taskRepository.getTasksStream(), _savedFilterType) { tasks, type ->
-            filterTasks(tasks, type)
+        combine(taskRepository.getTasksStreamPaging(), _savedFilterType) { tasks, type ->
+            filterTasks(type)
         }
             .map { Async.Success(it) }
-            .catch<Async<List<Task>>> { emit(Async.Error(R.string.loading_tasks_error)) }
+            .catch<Async<List<DTOMovie>>> { emit(Async.Error(R.string.loading_tasks_error)) }
 
     val uiState: StateFlow<TasksUiState> = combine(
         _filterUiInfo, _isLoading, _userMessage, _filteredTasksAsync
@@ -94,24 +94,6 @@ class TasksViewModel @Inject constructor(
         savedStateHandle[TASKS_FILTER_SAVED_STATE_KEY] = requestType
     }
 
-    fun clearCompletedTasks() {
-        viewModelScope.launch {
-            taskRepository.clearCompletedTasks()
-            showSnackbarMessage(R.string.completed_tasks_cleared)
-            refresh()
-        }
-    }
-
-    fun completeTask(task: Task, completed: Boolean) = viewModelScope.launch {
-        if (completed) {
-            taskRepository.completeTask(task.id)
-            showSnackbarMessage(R.string.task_marked_complete)
-        } else {
-            taskRepository.activateTask(task.id)
-            showSnackbarMessage(R.string.task_marked_active)
-        }
-    }
-
     fun showEditResultMessage(result: Int) {
         when (result) {
             EDIT_RESULT_OK -> showSnackbarMessage(R.string.successfully_saved_task_message)
@@ -136,21 +118,18 @@ class TasksViewModel @Inject constructor(
         }
     }
 
-    private fun filterTasks(tasks: List<Task>, filteringType: TasksFilterType): List<Task> {
-        val tasksToShow = ArrayList<Task>()
+    private fun filterTasks(filteringType: TasksFilterType): List<DTOMovie> {
+        val tasksToShow = ArrayList<DTOMovie>()
         // We filter the tasks based on the requestType
-        for (task in tasks) {
-            when (filteringType) {
-                TasksFilterType.ALL_TASKS -> tasksToShow.add(task)
-                TasksFilterType.ACTIVE_TASKS -> if (task.isActive) {
-                    tasksToShow.add(task)
-                }
-
-                TasksFilterType.COMPLETED_TASKS -> if (task.isCompleted) {
-                    tasksToShow.add(task)
-                }
-            }
-        }
+//        for (task in tasks) {
+//            when (filteringType) {
+//                TasksFilterType.ALL_TASKS -> tasksToShow.add(task)
+//                TasksFilterType.ACTIVE_TASKS -> tasksToShow.add(task)
+//
+//
+//                TasksFilterType.COMPLETED_TASKS -> tasksToShow.add(task)
+//            }
+//        }
         return tasksToShow
     }
 

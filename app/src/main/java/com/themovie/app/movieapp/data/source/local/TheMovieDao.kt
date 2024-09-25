@@ -16,7 +16,6 @@
 
 package com.themovie.app.movieapp.data.source.local
 
-import androidx.paging.PagingData
 import androidx.paging.PagingSource
 import androidx.room.Dao
 import androidx.room.Query
@@ -27,15 +26,15 @@ import kotlinx.coroutines.flow.Flow
  * Data Access Object for the task table.
  */
 @Dao
-interface TaskDao {
+interface TheMovieDao {
 
     /**
      * Observes list of tasks.
      *
      * @return all tasks.
      */
-    @Query("SELECT * FROM task")
-    fun observeAll(): PagingSource<Int, LocalTask>
+    @Query("SELECT * FROM theMovie")
+    fun observeAllPaging(): PagingSource<Int, LocalMovie>
 
     /**
      * Observes a single task.
@@ -43,16 +42,16 @@ interface TaskDao {
      * @param taskId the task id.
      * @return the task with taskId.
      */
-    @Query("SELECT * FROM task WHERE id = :taskId")
-    fun observeById(taskId: String): Flow<LocalTask>
+    @Query("SELECT * FROM theMovie WHERE id = :taskId")
+    fun observeById(taskId: String): Flow<LocalMovie>
 
     /**
      * Select all tasks from the tasks table.
      *
      * @return all tasks.
      */
-    @Query("SELECT * FROM task")
-    suspend fun getAll(): List<LocalTask>
+    @Query("SELECT * FROM theMovie")
+    suspend fun getAll(): List<LocalMovie>
 
     /**
      * Select a task by id.
@@ -60,8 +59,8 @@ interface TaskDao {
      * @param taskId the task id.
      * @return the task with taskId.
      */
-    @Query("SELECT * FROM task WHERE id = :taskId")
-    suspend fun getById(taskId: String): LocalTask?
+    @Query("SELECT * FROM theMovie WHERE id = :taskId")
+    suspend fun getById(taskId: String): LocalMovie?
 
     /**
      * Insert or update a task in the database. If a task already exists, replace it.
@@ -69,7 +68,7 @@ interface TaskDao {
      * @param task the task to be inserted or updated.
      */
     @Upsert
-    suspend fun upsert(task: LocalTask)
+    suspend fun upsert(task: LocalMovie)
 
     /**
      * Insert or update tasks in the database. If a task already exists, replace it.
@@ -77,36 +76,19 @@ interface TaskDao {
      * @param tasks the tasks to be inserted or updated.
      */
     @Upsert
-    suspend fun upsertAll(tasks: List<LocalTask>)
-
-    /**
-     * Update the complete status of a task
-     *
-     * @param taskId id of the task
-     * @param completed status to be updated
-     */
-    @Query("UPDATE task SET isCompleted = :completed WHERE id = :taskId")
-    suspend fun updateCompleted(taskId: String, completed: Boolean)
+    suspend fun upsertAll(tasks: List<LocalMovie>)
 
     /**
      * Delete a task by id.
      *
      * @return the number of tasks deleted. This should always be 1.
      */
-    @Query("DELETE FROM task WHERE id = :taskId")
+    @Query("DELETE FROM theMovie WHERE id = :taskId")
     suspend fun deleteById(taskId: String): Int
 
     /**
      * Delete all tasks.
      */
-    @Query("DELETE FROM task")
+    @Query("DELETE FROM theMovie")
     suspend fun deleteAll()
-
-    /**
-     * Delete all completed tasks from the table.
-     *
-     * @return the number of tasks deleted.
-     */
-    @Query("DELETE FROM task WHERE isCompleted = 1")
-    suspend fun deleteCompleted(): Int
 }

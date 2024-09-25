@@ -19,7 +19,8 @@ package com.themovie.app.movieapp.data
 import androidx.paging.Pager
 import androidx.paging.PagingData
 import androidx.paging.map
-import com.themovie.app.movieapp.data.source.local.TaskDao
+import com.themovie.app.movieapp.data.source.local.TheMovieDao
+import com.themovie.app.movieapp.data.source.network.DTOMovie
 import com.themovie.app.movieapp.data.source.network.NetworkDataSource
 import com.themovie.app.movieapp.di.ApplicationScope
 import com.themovie.app.movieapp.di.DefaultDispatcher
@@ -47,51 +48,25 @@ import javax.inject.Singleton
 @Singleton
 class DefaultTaskRepository @Inject constructor(
     private val networkDataSource: NetworkDataSource,
-    private val localDataSource: TaskDao,
+    private val localDataSource: TheMovieDao,
     @DefaultDispatcher private val dispatcher: CoroutineDispatcher,
     @ApplicationScope private val scope: CoroutineScope,
 ) : TaskRepository {
 
-    override suspend fun createTask(title: String, description: String): String {
-        // ID creation might be a complex operation so it's executed using the supplied
-        // coroutine dispatcher
-        val taskId = withContext(dispatcher) {
-            UUID.randomUUID().toString()
-        }
-        val task = Task(
-            title = title,
-            description = description,
-            id = taskId,
-        )
-        localDataSource.upsert(task.toLocal())
-        saveTasksToNetwork()
-        return taskId
-    }
-
     override suspend fun updateTask(taskId: String, title: String, description: String) {
         val task = getTask(taskId)?.copy(
-            title = title,
-            description = description
+            title = title
         ) ?: throw Exception("Task (id $taskId) not found")
 
         localDataSource.upsert(task.toLocal())
-        saveTasksToNetwork()
+       // saveTasksToNetwork()
     }
 
-    override suspend fun getTasks(forceUpdate: Boolean): List<Task> {
-        if (forceUpdate) {
-            refresh()
-        }
-        return withContext(dispatcher) {
-            localDataSource.getAll().toExternal()
-        }
-    }
-
-    override fun getTasksStream(): Flow<PagingData<Task>> {
+    override fun getTasksStreamPaging(): Flow<PagingData<DTOMovie>> {
         return Pager(
-            config = BasePagingSource.getDefaultPageConfig(pageSize = 1)
+            config = BasePagingSource.getDefaultPageConfig(pageSize = 10),
         ) {
-            localDataSource.observeAll()
+            localDataSource.observeAllPaging()
         }.flow.map { pagingData ->
             pagingData.map { tasks ->
                 withContext(dispatcher) {
@@ -105,7 +80,7 @@ class DefaultTaskRepository @Inject constructor(
         refresh()
     }
 
-    override fun getTaskStream(taskId: String): Flow<Task?> {
+    override fun getTaskStream(taskId: String): Flow<DTOMovie?> {
         return localDataSource.observeById(taskId).map { it.toExternal() }
     }
 
@@ -115,36 +90,21 @@ class DefaultTaskRepository @Inject constructor(
      * @param taskId - The ID of the task
      * @param forceUpdate - true if the task should be updated from the network data source first.
      */
-    override suspend fun getTask(taskId: String, forceUpdate: Boolean): Task? {
+    override suspend fun getTask(taskId: String, forceUpdate: Boolean): DTOMovie? {
         if (forceUpdate) {
             refresh()
         }
         return localDataSource.getById(taskId)?.toExternal()
     }
 
-    override suspend fun completeTask(taskId: String) {
-        localDataSource.updateCompleted(taskId = taskId, completed = true)
-        saveTasksToNetwork()
-    }
-
-    override suspend fun activateTask(taskId: String) {
-        localDataSource.updateCompleted(taskId = taskId, completed = false)
-        saveTasksToNetwork()
-    }
-
-    override suspend fun clearCompletedTasks() {
-        localDataSource.deleteCompleted()
-        saveTasksToNetwork()
-    }
-
     override suspend fun deleteAllTasks() {
         localDataSource.deleteAll()
-        saveTasksToNetwork()
+       // saveTasksToNetwork()
     }
 
     override suspend fun deleteTask(taskId: String) {
         localDataSource.deleteById(taskId)
-        saveTasksToNetwork()
+       // saveTasksToNetwork()
     }
 
     /**
@@ -164,33 +124,15 @@ class DefaultTaskRepository @Inject constructor(
      *
      * `withContext` is used here in case the bulk `toLocal` mapping operation is complex.
      */
-    override suspend fun refresh() {
-        withContext(dispatcher) {
-            val remoteTasks = networkDataSource.loadTasks()
-            localDataSource.deleteAll()
-            localDataSource.upsertAll(remoteTasks.toLocal())
-        }
-    }
-
-    /**
-     * Send the tasks from the local data source to the network data source
-     *
-     * Returns immediately after launching the job. Real apps may want to suspend here until the
-     * operation is complete or (better) use WorkManager to schedule this work. Both approaches
-     * should provide a mechanism for failures to be communicated back to the user so that
-     * they are aware that their data isn't being backed up.
-     */
-    private fun saveTasksToNetwork() {
-        scope.launch {
+    override suspend fun refresh(): Boolean {
+        return withContext(dispatcher) {
             try {
-                val localTasks = localDataSource.getAll()
-                val networkTasks = withContext(dispatcher) {
-                    localTasks.toNetwork()
-                }
-                networkDataSource.saveTasks(networkTasks)
+                val remoteTasks = networkDataSource.loadTasks()
+                localDataSource.deleteAll()
+                localDataSource.upsertAll(remoteTasks.toLocal())
+                true
             } catch (e: Exception) {
-                // In a real app you'd handle the exception e.g. by exposing a `networkStatus` flow
-                // to an app level UI state holder which could then display a Toast message.
+                false
             }
         }
     }

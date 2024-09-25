@@ -43,6 +43,7 @@ dependencies {
     kapt(libs.hilt.compiler)
 
     // Room
+    implementation(libs.room.paging)
     implementation(libs.room.runtime)
     implementation(libs.room.ktx)
     ksp(libs.room.compiler)

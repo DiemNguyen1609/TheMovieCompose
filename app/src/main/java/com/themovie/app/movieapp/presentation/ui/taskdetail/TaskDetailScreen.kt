@@ -31,11 +31,11 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.themovie.app.movieapp.R
-import com.themovie.app.movieapp.data.Task
-import com.themovie.app.movieapp.util.LoadingContent
-import com.themovie.app.movieapp.presentation.base.TaskDetailTopAppBar
 import com.google.accompanist.appcompattheme.AppCompatTheme
+import com.themovie.app.movieapp.R
+import com.themovie.app.movieapp.data.source.network.DTOMovie
+import com.themovie.app.movieapp.presentation.base.TaskDetailTopAppBar
+import com.themovie.app.movieapp.util.LoadingContent
 
 @Composable
 fun TaskDetailScreen(
@@ -65,7 +65,6 @@ fun TaskDetailScreen(
             empty = uiState.task == null && !uiState.isLoading,
             task = uiState.task,
             onRefresh = viewModel::refresh,
-            onTaskCheck = viewModel::setCompleted,
             modifier = Modifier.padding(paddingValues)
         )
 
@@ -91,8 +90,7 @@ fun TaskDetailScreen(
 private fun EditTaskContent(
     loading: Boolean,
     empty: Boolean,
-    task: Task?,
-    onTaskCheck: (Boolean) -> Unit,
+    task: DTOMovie?,
     onRefresh: () -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -123,10 +121,9 @@ private fun EditTaskContent(
 
             ) {
                 if (task != null) {
-                    Checkbox(task.isCompleted, onTaskCheck)
                     Column {
                         Text(text = task.title, style = MaterialTheme.typography.h6)
-                        Text(text = task.description, style = MaterialTheme.typography.body1)
+                        Text(text = task.year ?: "", style = MaterialTheme.typography.body1)
                     }
                 }
             }
@@ -142,13 +139,10 @@ private fun EditTaskContentPreview() {
             EditTaskContent(
                 loading = false,
                 empty = false,
-                Task(
+                DTOMovie(
                     title = "Title",
-                    description = "Description",
-                    isCompleted = false,
                     id = "ID"
                 ),
-                onTaskCheck = { },
                 onRefresh = { }
             )
         }
@@ -163,13 +157,10 @@ private fun EditTaskContentTaskCompletedPreview() {
             EditTaskContent(
                 loading = false,
                 empty = false,
-                Task(
+                DTOMovie(
                     title = "Title",
-                    description = "Description",
-                    isCompleted = false,
                     id = "ID"
                 ),
-                onTaskCheck = { },
                 onRefresh = { }
             )
         }
@@ -184,13 +175,10 @@ private fun EditTaskContentEmptyPreview() {
             EditTaskContent(
                 loading = false,
                 empty = true,
-                Task(
+                DTOMovie(
                     title = "Title",
-                    description = "Description",
-                    isCompleted = false,
                     id = "ID"
                 ),
-                onTaskCheck = { },
                 onRefresh = { }
             )
         }

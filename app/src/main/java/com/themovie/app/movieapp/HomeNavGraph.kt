@@ -35,11 +35,9 @@ import androidx.navigation.navArgument
 import com.themovie.app.movieapp.TheMovieDestinationsArgs.TASK_ID_ARG
 import com.themovie.app.movieapp.TheMovieDestinationsArgs.TITLE_ARG
 import com.themovie.app.movieapp.TheMovieDestinationsArgs.USER_MESSAGE_ARG
-import com.themovie.app.movieapp.presentation.ui.addedittask.AddEditTaskScreen
-import com.themovie.app.movieapp.presentation.ui.statistics.StatisticsScreen
 import com.themovie.app.movieapp.presentation.ui.taskdetail.TaskDetailScreen
-import com.themovie.app.movieapp.presentation.ui.tasks.TasksScreen
 import com.themovie.app.movieapp.presentation.base.AppModalDrawer
+import com.themovie.app.movieapp.presentation.ui.home.HomeScreen
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
@@ -69,37 +67,17 @@ fun TheMovieNavGraph(
             )
         ) { entry ->
             AppModalDrawer(drawerState, currentRoute, navActions) {
-                TasksScreen(
-                    userMessage = entry.arguments?.getInt(USER_MESSAGE_ARG)!!,
-                    onUserMessageDisplayed = { entry.arguments?.putInt(USER_MESSAGE_ARG, 0) },
-                    onAddTask = { navActions.navigateToAddEditTask(R.string.add_task, null) },
-                    onTaskClick = { task -> navActions.navigateToTaskDetail(task.id) },
+//                TasksScreen(
+//                    userMessage = entry.arguments?.getInt(USER_MESSAGE_ARG)!!,
+//                    onUserMessageDisplayed = { entry.arguments?.putInt(USER_MESSAGE_ARG, 0) },
+//                    onAddTask = { navActions.navigateToAddEditTask(R.string.add_task, null) },
+//                    onTaskClick = { task -> navActions.navigateToTaskDetail(task.id) },
+//                    openDrawer = { coroutineScope.launch { drawerState.open() } }
+//                )
+                HomeScreen(
                     openDrawer = { coroutineScope.launch { drawerState.open() } }
                 )
             }
-        }
-        composable(TheMovieDestinations.STATISTICS_ROUTE) {
-            AppModalDrawer(drawerState, currentRoute, navActions) {
-                StatisticsScreen(openDrawer = { coroutineScope.launch { drawerState.open() } })
-            }
-        }
-        composable(
-            TheMovieDestinations.ADD_EDIT_TASK_ROUTE,
-            arguments = listOf(
-                navArgument(TITLE_ARG) { type = NavType.IntType },
-                navArgument(TASK_ID_ARG) { type = NavType.StringType; nullable = true },
-            )
-        ) { entry ->
-            val taskId = entry.arguments?.getString(TASK_ID_ARG)
-            AddEditTaskScreen(
-                topBarTitle = entry.arguments?.getInt(TITLE_ARG)!!,
-                onTaskUpdate = {
-                    navActions.navigateToTasks(
-                        if (taskId == null) ADD_EDIT_RESULT_OK else EDIT_RESULT_OK
-                    )
-                },
-                onBack = { navController.popBackStack() }
-            )
         }
         composable(TheMovieDestinations.TASK_DETAIL_ROUTE) {
             TaskDetailScreen(

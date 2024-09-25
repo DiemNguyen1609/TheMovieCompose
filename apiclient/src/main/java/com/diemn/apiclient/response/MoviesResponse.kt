@@ -22,7 +22,7 @@ data class MetaDataResponse(
 
 data class MovieItemResponse(
     @SerializedName("id")
-    val id: Int? = null,
+    val id: String? = null,
     @SerializedName("title")
     val title: String? = null,
     @SerializedName("poster")

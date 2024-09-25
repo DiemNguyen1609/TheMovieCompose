@@ -14,24 +14,22 @@
  * limitations under the License.
  */
 
-package com.themovie.app.movieapp.data.source.local
-
-import androidx.room.Entity
-import androidx.room.PrimaryKey
+package com.themovie.app.movieapp.data.source.network
 
 /**
- * Internal model used to represent a task stored locally in a Room database. This is used inside
- * the data layer only.
+ * Internal model used to represent a task obtained from the network. This is used inside the data
+ * layer only.
  *
  * See ModelMappingExt.kt for mapping functions used to convert this model to other
  * models.
  */
-@Entity(
-    tableName = "task"
-)
-data class LocalTask(
-    @PrimaryKey val id: String,
-    var title: String,
-    var description: String,
-    var isCompleted: Boolean,
+data class DTOMovie(
+    val id: String,
+    val title: String,
+    val poster: String? = "",
+    val year: String? = "",
+    val country: String? = "",
+    val imdbRating: String? = "",
+    val genres: List<String>? = emptyList(),
+    val images: List<String>? = emptyList(),
 )

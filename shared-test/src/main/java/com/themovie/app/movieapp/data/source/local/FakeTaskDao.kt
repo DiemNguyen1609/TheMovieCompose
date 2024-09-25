@@ -18,15 +18,13 @@ package com.themovie.app.movieapp.data.source.local
 
 import android.os.Build
 import androidx.annotation.RequiresApi
-import com.themovie.app.movieapp.data.source.local.LocalTask
-import com.themovie.app.movieapp.data.source.local.TaskDao
 import kotlinx.coroutines.flow.Flow
 
-class FakeTaskDao(initialTasks: List<LocalTask>? = emptyList()) : TaskDao {
+class FakeTaskDao(initialTasks: List<LocalMovie>? = emptyList()) : TheMovieDao {
 
-    private var _tasks: MutableMap<String, LocalTask>? = null
+    private var _tasks: MutableMap<String, LocalMovie>? = null
 
-    var tasks: List<LocalTask>?
+    var tasks: List<LocalMovie>?
         get() = _tasks?.values?.toList()
         set(newTasks) {
             _tasks = newTasks?.associateBy { it.id }?.toMutableMap()
@@ -38,13 +36,13 @@ class FakeTaskDao(initialTasks: List<LocalTask>? = emptyList()) : TaskDao {
 
     override suspend fun getAll() = tasks ?: throw Exception("Task list is null")
 
-    override suspend fun getById(taskId: String): LocalTask? = _tasks?.get(taskId)
+    override suspend fun getById(taskId: String): LocalMovie? = _tasks?.get(taskId)
 
-    override suspend fun upsertAll(tasks: List<LocalTask>) {
+    override suspend fun upsertAll(tasks: List<LocalMovie>) {
         _tasks?.putAll(tasks.associateBy { it.id })
     }
 
-    override suspend fun upsert(task: LocalTask) {
+    override suspend fun upsert(task: LocalMovie) {
         _tasks?.put(task.id, task)
     }
 
@@ -74,11 +72,11 @@ class FakeTaskDao(initialTasks: List<LocalTask>? = emptyList()) : TaskDao {
         return 0
     }
 
-    override fun observeAll(): Flow<List<LocalTask>> {
+    override fun observeAll(): Flow<List<LocalMovie>> {
         TODO("Not implemented")
     }
 
-    override fun observeById(taskId: String): Flow<LocalTask> {
+    override fun observeById(taskId: String): Flow<LocalMovie> {
         TODO("Not implemented")
     }
 }

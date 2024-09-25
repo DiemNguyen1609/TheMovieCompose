@@ -16,13 +16,15 @@
 
 package com.themovie.app.movieapp.data.source.network
 
+import com.diemn.apiclient.response.MovieItemResponse
+
 /**
  * Main entry point for accessing tasks data from the network.
  *
  */
 interface NetworkDataSource {
 
-    suspend fun loadTasks(): List<NetworkTask>
+    suspend fun loadTasks(): List<MovieItemResponse>
 
-    suspend fun saveTasks(tasks: List<NetworkTask>)
+    suspend fun saveTasks(tasks: List<DTOMovie>)
 }

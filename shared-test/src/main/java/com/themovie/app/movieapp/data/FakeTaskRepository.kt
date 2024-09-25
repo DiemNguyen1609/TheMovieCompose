@@ -17,8 +17,7 @@
 package com.themovie.app.movieapp.data
 
 import androidx.annotation.VisibleForTesting
-import com.themovie.app.movieapp.data.Task
-import com.themovie.app.movieapp.data.TaskRepository
+import androidx.paging.PagingData
 import kotlinx.coroutines.flow.*
 import java.util.UUID
 
@@ -58,6 +57,10 @@ class FakeTaskRepository : TaskRepository {
             saveTask(it)
         }
         return taskId
+    }
+
+    override fun getTasksStreamPaging(): Flow<PagingData<Task>> {
+        TODO("Not yet implemented")
     }
 
     override fun getTasksStream(): Flow<List<Task>> = observableTasks
