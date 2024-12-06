@@ -5,8 +5,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
+import com.themovie.app.movieapp.data.DataStoreRepository
 import com.themovie.app.movieapp.data.TaskRepository
 import com.themovie.app.movieapp.data.source.network.DTOMovie
+import com.themovie.app.movieapp.di.DataSorePreferenceKey
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
@@ -18,6 +20,7 @@ import javax.inject.Inject
 @HiltViewModel
 class HomeViewModel @Inject constructor(
     private val taskRepository: TaskRepository,
+    private val dataStoreRepository: DataStoreRepository,
     private val savedStateHandle: SavedStateHandle
 ) : ViewModel() {
     private val _isLoading = MutableStateFlow(false)
@@ -41,6 +44,15 @@ class HomeViewModel @Inject constructor(
             taskRepository.getTasksStreamPaging().collectLatest {
                 _obsTheMovieData.value = it
             }
+        }
+    }
+
+    fun saveMovieList(movieList: List<DTOMovie>){
+        viewModelScope.launch {
+            dataStoreRepository.putString(
+                key = DataSorePreferenceKey.DATA_STORE_MOVIE_LIST,
+                value = movieList.toString()
+            )
         }
     }
 }

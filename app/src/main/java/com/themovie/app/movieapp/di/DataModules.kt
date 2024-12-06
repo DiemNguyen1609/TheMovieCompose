@@ -17,7 +17,12 @@
 package com.themovie.app.movieapp.di
 
 import android.content.Context
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.preferencesDataStore
 import androidx.room.Room
+import com.themovie.app.movieapp.data.DataStoreRepository
+import com.themovie.app.movieapp.data.DataStoreRepositoryImpl
 import com.themovie.app.movieapp.data.DefaultTaskRepository
 import com.themovie.app.movieapp.data.TaskRepository
 import com.themovie.app.movieapp.data.source.local.TheMovieDao
@@ -66,4 +71,15 @@ object DatabaseModule {
 
     @Provides
     fun provideTaskDao(database: TheMovieDatabase): TheMovieDao = database.theMovieDao()
+}
+
+@Module
+@InstallIn(SingletonComponent::class)
+object DatastorePreferenceModule {
+
+    @Singleton
+    @Provides
+    fun provideDataStoreRepository(
+        @ApplicationContext app: Context
+    ): DataStoreRepository = DataStoreRepositoryImpl(app)
 }

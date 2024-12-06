@@ -16,30 +16,13 @@
 
 package com.themovie.app.movieapp.data
 
-import android.content.Context
-import androidx.datastore.preferences.core.Preferences
-import androidx.paging.PagingData
-import com.themovie.app.movieapp.data.source.network.DTOMovie
-import kotlinx.coroutines.flow.Flow
-
 /**
  * Interface to the data layer.
  */
-interface TaskRepository {
+interface DataStoreRepository {
 
-    fun getTasksStreamPaging(): Flow<PagingData<DTOMovie>>
-
-    suspend fun refresh() : Boolean
-
-    fun getTaskStream(taskId: String): Flow<DTOMovie?>
-
-    suspend fun getTask(taskId: String, forceUpdate: Boolean = false): DTOMovie?
-
-    suspend fun refreshTask(taskId: String)
-
-    suspend fun updateTask(taskId: String, title: String, description: String)
-
-    suspend fun deleteAllTasks()
-
-    suspend fun deleteTask(taskId: String)
+    suspend fun putString(key: String, value: String)
+    suspend fun putInt(key: String, value: Int)
+    suspend fun getString(key: String): String?
+    suspend fun getInt(key: String): Int?
 }

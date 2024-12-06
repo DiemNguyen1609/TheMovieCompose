@@ -46,7 +46,6 @@ android {
     buildTypes {
         getByName("debug") {
             isMinifyEnabled = false
-            isTestCoverageEnabled = true
             proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro")
             testProguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguardTest-rules.pro")
         }
@@ -210,6 +209,11 @@ dependencies {
     // Paging
     implementation(libs.paging.compose)
     implementation(libs.paging.runtime)
+
+    // datastore
+    implementation(libs.androidx.datastore.core)
+    implementation(libs.androidx.datastore.preferences)
+    implementation(libs.gson)
 }
 
 apply (from = "../config/detekt/detekt.gradle")
