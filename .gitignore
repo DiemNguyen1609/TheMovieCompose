@@ -1,0 +1,65 @@
+# Built application files
+*.apk
+*.ap_
+*.aab
+
+# Files for the ART/Dalvik VM
+*.dex
+
+# Java class files
+*.class
+
+# Generated files
+bin/
+gen/
+out/
+build/
+captures/
+.navigation/
+
+# Gradle files
+.gradle/
+**/build/
+!gradle-wrapper.jar
+.gradle-cache/
+
+# Signing files
+*.jks
+*.keystore
+
+# Local configuration files
+local.properties
+*.iml
+.idea/
+*.log
+*.hprof
+
+# Proguard files
+proguard/
+proguard-rules.pro
+
+# Android Studio Navigation editor temp files
+.navigation/
+
+# Crashlytics and Firebase
+fabric.properties
+crashlytics.properties
+firebase-debug.log
+
+# Others
+.DS_Store
+*.swp
+*.swo
+
+# OS generated files
+ehthumbs.db
+Icon?
+Thumbs.db
+desktop.ini
+
+# NDK
+obj/
+
+# Jetpack Compose Compiler Reports
+compose-metrics/
+compose-reports/
