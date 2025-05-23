@@ -5,19 +5,23 @@ import com.google.gson.annotations.SerializedName
 data class MoviesResponse(
     @SerializedName("data")
     val data: List<MovieItemResponse>? = null,
-    @SerializedName("metadata")
-    val metadata: MetaDataResponse? = null,
+    @SerializedName("page")
+    val currentPage: String? = null,
+    @SerializedName("limit")
+    val perPage: Int? = null,
+    @SerializedName("total_pages")
+    val pageCount: Int? = null,
+    @SerializedName("total_items")
+    val totalCount: Int? = null,
 )
 
-data class MetaDataResponse(
-    @SerializedName("current_page")
-    val currentPage: String? = null,
-    @SerializedName("per_page")
-    val perPage: Int? = null,
-    @SerializedName("page_count")
-    val pageCount: Int? = null,
-    @SerializedName("total_count")
-    val totalCount: Int? = null,
+data class ImdbResponse(
+    @SerializedName("rating")
+    val rating: String? = null,
+    @SerializedName("vote")
+    val vote: Int? = null,
+    @SerializedName("id")
+    val id: Int? = null,
 )
 
 data class MovieItemResponse(
@@ -27,14 +31,18 @@ data class MovieItemResponse(
     val title: String? = null,
     @SerializedName("poster")
     val poster: String? = null,
+    @SerializedName("directors")
+    val directors: String? = null,
     @SerializedName("year")
     val year: String? = null,
-    @SerializedName("country")
-    val country: String? = null,
-    @SerializedName("imdb_rating")
-    val imdbRating: String? = null,
+    @SerializedName("fullplot")
+    val fullPlot: String? = null,
     @SerializedName("genres")
     val genres: List<String>? = null,
-    @SerializedName("images")
-    val images: List<String>? = null,
+    @SerializedName("cast")
+    val cast: List<String>? = null,
+    @SerializedName("countries")
+    val countries: List<String>? = null,
+    @SerializedName("imdb")
+    val imdb: ImdbResponse? = null,
 )
