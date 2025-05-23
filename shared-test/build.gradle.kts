@@ -22,7 +22,7 @@ plugins {
 }
 
 android {
-    namespace = "com.example.android.architecture.blueprints.todoapp.shared.test"
+    namespace = "com.themovie.app.movieapp.shared.test"
     compileSdk = libs.versions.compileSdk.get().toInt()
     defaultConfig {
         minSdk = libs.versions.minSdk.get().toInt()
@@ -31,6 +31,7 @@ android {
 
 dependencies {
     implementation(project(":app"))
+    implementation(project(":apiclient"))
     implementation(libs.kotlinx.coroutines.android)
     implementation(libs.kotlinx.coroutines.test)
     implementation(libs.junit4)
@@ -42,6 +43,7 @@ dependencies {
     kapt(libs.hilt.compiler)
 
     // Room
+    implementation(libs.room.paging)
     implementation(libs.room.runtime)
     implementation(libs.room.ktx)
     ksp(libs.room.compiler)

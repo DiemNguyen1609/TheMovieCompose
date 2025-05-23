@@ -23,20 +23,22 @@ plugins {
 }
 
 android {
+    namespace = "com.themovie.app.movieapp"
     compileSdk = libs.versions.compileSdk.get().toInt()
 
     defaultConfig {
-        applicationId = "com.example.android.architecture.blueprints.main"
+        applicationId = "com.themovie.app.movieapp"
         minSdk = libs.versions.minSdk.get().toInt()
         targetSdk = libs.versions.targetSdk.get().toInt()
         versionCode = 1
         versionName = "1.0"
 
-        testInstrumentationRunner = "com.example.android.architecture.blueprints.todoapp.CustomTestRunner"
+        testInstrumentationRunner = "com.example.android.architecture.blueprints.movieapp.CustomTestRunner"
 
         javaCompileOptions {
             annotationProcessorOptions {
                 arguments += "room.incremental" to "true"
+                arguments += "room.schemaLocation" to "$projectDir/schemas"
             }
         }
     }
@@ -44,7 +46,6 @@ android {
     buildTypes {
         getByName("debug") {
             isMinifyEnabled = false
-            isTestCoverageEnabled = true
             proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro")
             testProguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguardTest-rules.pro")
         }
@@ -81,22 +82,25 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
 
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "17"
     }
 
-    packagingOptions {
-        excludes += "META-INF/AL2.0"
-        excludes += "META-INF/LGPL2.1"
+    packaging {
+        resources {
+            excludes += "/META-INF/{AL2.0,LGPL2.1}"
+        }
     }
 
     composeOptions {
         kotlinCompilerExtensionVersion = libs.versions.androidxComposeCompiler.get()
     }
+
+
 
     tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach {
         kotlinOptions {
@@ -111,7 +115,7 @@ android {
  all versions in a single place. This improves readability and helps managing project complexity.
  */
 dependencies {
-
+    implementation(project(":apiclient"))
     // App dependencies
     implementation(libs.androidx.annotation)
     implementation(libs.kotlinx.coroutines.android)
@@ -119,6 +123,7 @@ dependencies {
     implementation(libs.androidx.test.espresso.idling.resources)
 
     // Architecture Components
+    implementation(libs.room.paging)
     implementation(libs.room.runtime)
     implementation(libs.room.ktx)
     ksp(libs.room.compiler)
@@ -146,6 +151,11 @@ dependencies {
     implementation(libs.androidx.lifecycle.viewModelCompose)
     implementation(libs.accompanist.appcompat.theme)
     implementation(libs.accompanist.swiperefresh)
+    implementation(libs.coil.kt)
+    implementation(libs.coil.kt.svg)
+    implementation(libs.coil.kt.compose)
+    implementation(libs.androidx.compose.material.iconsExtended)
+
 
     debugImplementation(composeBom)
     debugImplementation(libs.androidx.compose.ui.tooling.core)
@@ -197,4 +207,16 @@ dependencies {
     // AndroidX Test - Hilt testing
     androidTestImplementation(libs.hilt.android.testing)
     kaptAndroidTest(libs.hilt.compiler)
+
+    // Paging
+    implementation(libs.paging.compose)
+    implementation(libs.paging.runtime)
+
+    // datastore
+    implementation(libs.androidx.datastore.core)
+    implementation(libs.androidx.datastore.preferences)
+    implementation(libs.gson)
 }
+
+apply (from = "../config/detekt/detekt.gradle")
+

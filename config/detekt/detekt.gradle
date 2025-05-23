@@ -1,0 +1,20 @@
+buildscript {
+    repositories {
+        gradlePluginPortal()
+        google()
+    }
+    dependencies {
+        classpath libs.android.gradlePlugin
+        classpath libs.detekt.gradle.plugin
+    }
+}
+
+apply plugin: io.gitlab.arturbosch.detekt.DetektPlugin
+
+def projectSource = file(projectDir)
+//def presentationSources = file("$rootDir/app/src/main/java/com/tracer/joblogic/presentation")
+def configFile = files("$rootDir/config/detekt/detekt.yml")
+def baselineFile = file("$rootDir/config/detekt/baseline.xml")
+def kotlinFiles = "**/*.kt"
+def resourceFiles = "**/resources/**"
+def buildFiles = "**/build/**"
