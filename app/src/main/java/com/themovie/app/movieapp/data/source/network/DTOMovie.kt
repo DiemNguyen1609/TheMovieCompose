@@ -28,16 +28,8 @@ data class DTOMovie(
     val title: String,
     val poster: String? = "",
     val year: String? = "",
-    val fullPlot: String? = "",
-    val directors: String? = "",
-    val imdb: DTOImdb? = null,
+    val country: String? = "",
+    val imdbRating: String? = "",
     val genres: List<String>? = emptyList(),
-    val countries: List<String>? = emptyList(),
-    val cast: List<String>? = emptyList(),
-)
-
-data class DTOImdb(
-    val rating: String? = "",
-    val vote: String? = "",
-    val id: String? = "",
+    val images: List<String>? = emptyList(),
 )

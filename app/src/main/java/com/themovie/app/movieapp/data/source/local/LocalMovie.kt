@@ -18,7 +18,6 @@ package com.themovie.app.movieapp.data.source.local
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.themovie.app.movieapp.data.source.network.DTOImdb
 
 /**
  * Internal model used to represent a task stored locally in a Room database. This is used inside
@@ -32,19 +31,9 @@ import com.themovie.app.movieapp.data.source.network.DTOImdb
 )
 data class LocalMovie(
     @PrimaryKey val id: String,
-    val title: String,
-    val poster: String? = "",
+    var title: String,
+    var poster: String? = "",
     val year: String? = "",
-    val fullPlot: String? = "",
-    val directors: String? = "",
-    val imdb: LocalImdb? = null,
-    val genres: List<String>? = emptyList(),
-    val countries: List<String>? = emptyList(),
-    val cast: List<String>? = emptyList(),
-)
-
-data class LocalImdb(
-    val rating: String? = "",
-    val vote: String? = "",
-    val id: String? = "",
+    val country: String? = "",
+    val imdbRating: String? = "",
 )
