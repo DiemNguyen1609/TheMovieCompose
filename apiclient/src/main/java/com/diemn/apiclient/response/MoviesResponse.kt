@@ -32,7 +32,7 @@ data class MovieItemResponse(
     @SerializedName("poster")
     val poster: String? = null,
     @SerializedName("directors")
-    val directors: String? = null,
+    val directors: List<String>? = null,
     @SerializedName("year")
     val year: String? = null,
     @SerializedName("fullplot")

@@ -154,6 +154,8 @@ dependencies {
     implementation(libs.coil.kt)
     implementation(libs.coil.kt.svg)
     implementation(libs.coil.kt.compose)
+    implementation(libs.androidx.compose.material.iconsExtended)
+
 
     debugImplementation(composeBom)
     debugImplementation(libs.androidx.compose.ui.tooling.core)

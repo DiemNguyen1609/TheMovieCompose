@@ -16,8 +16,11 @@
 
 package com.themovie.app.movieapp.data
 
+import com.diemn.apiclient.response.ImdbResponse
 import com.diemn.apiclient.response.MovieItemResponse
+import com.themovie.app.movieapp.data.source.local.LocalImdb
 import com.themovie.app.movieapp.data.source.local.LocalMovie
+import com.themovie.app.movieapp.data.source.network.DTOImdb
 import com.themovie.app.movieapp.data.source.network.DTOMovie
 
 /**
@@ -34,14 +37,30 @@ import com.themovie.app.movieapp.data.source.network.DTOMovie
  *
  */
 
+fun DTOImdb.toLocal() = LocalImdb(
+    id = id,
+    rating = rating,
+    vote = vote,
+)
+
+fun LocalImdb.toExternal() = DTOImdb(
+    id = id,
+    rating = rating,
+    vote = vote,
+)
+
 // External to Local
 fun DTOMovie.toLocal() = LocalMovie(
     id = id,
     title = title,
     poster = poster,
     year = year,
-    country = country,
-    imdbRating = imdbRating
+    fullPlot = fullPlot,
+    directors = directors,
+    imdb = imdb?.toLocal(),
+    genres = genres,
+    countries = countries,
+    cast = cast,
 )
 
 @JvmName("externalToLocal")
@@ -53,8 +72,12 @@ fun LocalMovie.toExternal() = DTOMovie(
     title = title,
     poster = poster,
     year = year,
-    country = country,
-    imdbRating = imdbRating
+    fullPlot = fullPlot,
+    directors = directors,
+    imdb = imdb?.toExternal(),
+    genres = genres,
+    countries = countries,
+    cast = cast,
 )
 
 // Note: JvmName is used to provide a unique name for each extension function with the same name.
@@ -69,8 +92,18 @@ fun MovieItemResponse.toLocal() = LocalMovie(
     title = title ?: "",
     poster = poster,
     year = year,
-    country = country,
-    imdbRating = imdbRating
+    fullPlot = fullPlot,
+    directors = directors,
+    imdb = imdb?.toLocal(),
+    genres = genres,
+    countries = countries,
+    cast = cast,
+)
+
+fun ImdbResponse.toLocal() = LocalImdb(
+    id = id ?: 0,
+    rating = rating ?: "",
+    vote = vote ?: 0,
 )
 
 @JvmName("networkToLocal")

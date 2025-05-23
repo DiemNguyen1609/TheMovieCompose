@@ -18,6 +18,8 @@ package com.themovie.app.movieapp.data.source.local
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
+import com.themovie.app.movieapp.data.Converters
 
 /**
  * The Room Database that contains the Task table.
@@ -25,7 +27,7 @@ import androidx.room.RoomDatabase
  * Note that exportSchema should be true in production databases.
  */
 @Database(entities = [LocalMovie::class], version = 1, exportSchema = false)
+@TypeConverters(Converters::class)
 abstract class TheMovieDatabase : RoomDatabase() {
-
     abstract fun theMovieDao(): TheMovieDao
 }
